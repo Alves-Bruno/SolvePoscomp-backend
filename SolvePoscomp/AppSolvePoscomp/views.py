@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 # from django.http import HttpResponse
-from .forms import QuestaoForm
+# from .forms import QuestaoForm
 from .models import Questao
 from django.contrib.auth.models import User
 # from django.http import JsonResponse
@@ -13,37 +13,11 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-from .serializers import QuestaoSerializer
+from .serializers import QuestaoSerializer, QuestaoSerializerGet
 
 def index(request):
-    return HttpResponse("POSCOMP APP - WELCOME " + str(request.user.username) + "!")
-
-@login_required(redirect_field_name='/accounts/login')
-def questao_create(request):
-	# new_questao = 0
-	# user_instance = User.objects.get(username=request.user.username)
-	print(request.user)
-	initial_values = {
-		"user_id": request.user
-	}
-	
-	form = QuestaoForm(request.POST or None, initial=initial_values)
-	if form.is_valid():
-		data = form.cleaned_data
-		new_questao = form.save()
-		return JsonResponse(data)
-	else:
-		data = form.errors.as_json()
-		return JsonResponse(data, status=400) 
-
-def questao_by_id(request, questao_id):
-	questao = get_object_or_404(Questao, id=questao_id)
-	return render(request, 'questao_by_id.html', {'questao': questao})
-
-# def account_confirm_email(request, uidb64, token):
-# 	print(uidb64)
-# 	print(token)
-# 	return HttpResponse('')
+    return render(request, 'home.html', {'user': request.user.username})
+    # return HttpResponse("POSCOMP APP - WELCOME " + str(request.user.username) + "!" + "{{% csrf_token %}}")
 
 ## QUESTAO VIEWS
 @csrf_exempt
@@ -53,25 +27,26 @@ def questao_list(request):
     """
     if request.method == 'GET':
         questoes = Questao.objects.all()
-        serializer = QuestaoSerializer(questoes, many=True)
+        serializer = QuestaoSerializerGet(questoes, many=True)
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = QuestaoSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+        if request.user.is_authenticated:
+            data = JSONParser().parse(request)
+            serializer = QuestaoSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse(serializer.data, status=201)
+            return JsonResponse(serializer.errors, status=400)
+        else:
+            return JsonResponse({'Error':"User not logged in."},status=401)
 
 @csrf_exempt
-@login_required(redirect_field_name='/')
 def questao_detail(request, pk):
     """
     Retrieve, update or delete a code snippet.
     """
     print(request.user)
-
 
     try:
         questao = Questao.objects.get(id=pk)
@@ -79,17 +54,28 @@ def questao_detail(request, pk):
         return HttpResponse(status=404)
 
     if request.method == 'GET':
-        serializer = QuestaoSerializer(questao)
+        serializer = QuestaoSerializerGet(questao)
         return JsonResponse(serializer.data)
+    
+    # @login_required
+    if request.user.is_authenticated:
+        # Checking if the question belongs to the user
+        if questao.user_id.id == request.user.id:
+            if request.method == 'PUT':
+                data = JSONParser().parse(request)
+                # data = data + {"user_id":request.user}
+                data["user_id"] = request.user.id 
+                # print(data)
+                serializer = QuestaoSerializer(questao, data=data)
 
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = QuestaoSerializer(questao, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
+                if serializer.is_valid():
+                    serializer.save()
+                    return JsonResponse(serializer.data)
+                    
+                return JsonResponse(serializer.errors, status=400)
 
-    elif request.method == 'DELETE':
-        questao.delete()
-        return HttpResponse(status=204)
+            elif request.method == 'DELETE':
+                questao.delete()
+                return HttpResponse(status=204)
+        else:
+            return JsonResponse({'Error':"Questão pertence a outro usuário"},status=401)
