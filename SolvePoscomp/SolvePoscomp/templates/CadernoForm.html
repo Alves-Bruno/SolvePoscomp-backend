@@ -1,0 +1,16 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+
+<form action="{% url 'AppSolvePoscomp:questao_create' %}" method='POST'>{% csrf_token %}
+    <!-- {{ form.as_p }} -->
+    <table>{{ form.as_table }}</table>
+    <input type='submit' value='Save' />
+    <!-- <button type="submit" </button>Criar!</button> -->
+</form>
+
+
+
+
+{% endblock %}

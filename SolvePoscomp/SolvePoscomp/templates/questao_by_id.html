@@ -1,0 +1,13 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+<ol>
+    <li><b>Id:</b> {{ questao.id }}</li>
+	<li><b>Texto:</b> {{ questao.texto }}</li>
+	<li><b>Imagem:</b> {{ questao.imagem }}</li>
+	<li><b>Alternativa_Correta:</b> {{ questao.alternativa_correta }}</li>
+	<li><b>User:</b> {{ questao.user_id }}</li>
+</ol>	
+
+{% endblock %}
