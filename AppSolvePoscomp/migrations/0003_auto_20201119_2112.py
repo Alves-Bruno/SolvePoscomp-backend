@@ -38,8 +38,9 @@ def add_basic_tags(apps, schema_editor):
 
     Tag = apps.get_model('AppSolvePoscomp', 'Tag')
     for tag in basic_tags:
-        new_tag = Tag(nome=tag)
-        new_tag.save()
+        if len(tag) <= 30:
+            new_tag = Tag(nome=tag)
+            new_tag.save()
 
 class Migration(migrations.Migration):
 
