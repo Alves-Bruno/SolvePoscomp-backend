@@ -26,7 +26,13 @@ urlpatterns = [
 	url(r'^auth/registration/', include('rest_auth.registration.urls')),
 	url(r'^account/', include('allauth.urls')),
 
+	#QUESTAO URLS
 	path('questao/', views.questao_list),
 	path('questao/<int:pk>/', views.questao_detail),
+
+	# TAG URLS
+	path('tag/', views.tag_list),
+	path('tag/<int:pk>/', views.tag_detail),
+	path('tag/<search>/', views.tag_search),
 
 ]
