@@ -50,9 +50,7 @@ def is_questao_valid(data, questao):
 ## QUESTAO VIEWS
 @csrf_exempt
 def questao_list(request):
-    """
-    List all code snippets, or create a new snippet.
-    """
+
     if request.method == 'GET':
         questoes = Questao.objects.all()
         serializer = QuestaoSerializer(questoes, many=True)
@@ -68,6 +66,7 @@ def questao_list(request):
                 return JsonResponse(serializer.errors, status=400)
         else:
             return JsonResponse({'Error':"User not logged in."},status=401)
+
 
 @csrf_exempt
 def questao_detail(request, pk):
