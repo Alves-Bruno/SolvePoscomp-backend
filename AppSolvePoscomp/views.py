@@ -15,10 +15,52 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from .serializers import *
 from rest_framework import serializers
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+import jwt
+from django.conf import settings
 
+import jwt
+from rest_framework import authentication, exceptions
+from django.conf import settings
+from django.contrib.auth.models import User
+from rest_framework import authentication, exceptions
+from django.contrib.auth.models import AnonymousUser
+
+def get_user_by_token(request):
+    if "Authorization" not in request.headers:
+        return AnonymousUser(), 'Authorization Header required.'
+
+    auth_header = request.headers["Authorization"]
+    _, token = auth_header.split(' ')
+    
+    try:
+        payload = jwt.decode(token, settings.SECRET_KEY)
+    except jwt.DecodeError as identifier:
+        # raise exceptions.AuthenticationFailed('Your token is invalid,login')
+        return AnonymousUser(), 'JWT Token is invalid.'
+    except jwt.ExpiredSignatureError as identifier:
+        # raise exceptions.AuthenticationFailed('Your token is expired,login')
+        return AnonymousUser(), 'JWT Token has expired.'
+
+    return User.objects.get(username=payload["username"]), 'Authenticated'
+
+# @login_required
 def index(request):
+
+    # payload = get_user_by_token(request.headers['Authorization'])
+
+    # print("payload")
+    # print(payload)
+
+    request.user, code = get_user_by_token(request)
+    print(request.user)
+    print(type(request.user))
+
+    if request.user.is_authenticated:
+        print("AUTENTICADOoOOOOOOOOOOOO")
+
     return render(request, 'home.html', {'user': request.user.username})
-    # return HttpResponse("POSCOMP APP - WELCOME " + str(request.user.username) + "!" + "{{% csrf_token %}}")
 
 class validation():
     data = ''
@@ -57,6 +99,7 @@ def questao_list(request):
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
+        request.user, code = get_user_by_token(request)
         if request.user.is_authenticated:
             data = JSONParser().parse(request)
             questao_valid, serializer = is_questao_valid(data, None)           
@@ -65,7 +108,7 @@ def questao_list(request):
             else:
                 return JsonResponse(serializer.errors, status=400)
         else:
-            return JsonResponse({'Error':"User not logged in."},status=401)
+            return JsonResponse({'Error':"User not logged in. " + code},status=401)
 
 
 @csrf_exempt
@@ -85,6 +128,7 @@ def questao_detail(request, pk):
         return JsonResponse(serializer.data)
     
     # @login_required
+    request.user, code = get_user_by_token(request)
     if request.user.is_authenticated:
         # Checking if the question belongs to the user
         if questao.user_id.id == request.user.id:
@@ -102,6 +146,8 @@ def questao_detail(request, pk):
                 return HttpResponse(status=204)
         else:
             return JsonResponse({'Error':"Questão pertence a outro usuário"},status=401)
+    else:
+        return JsonResponse({'Error':"User not logged in. " + code},status=401)
 
 ## TAG VIEWS
 @csrf_exempt

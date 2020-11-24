@@ -54,8 +54,8 @@
 @apiName PostQuestao
 @apiGroup Questao
 @apiParam {Header} X-CSRFToken csrftoken para submissao de formularios.
+@apiParam {Header} Authentication Bearer <JWT-Token recebido no login>.
 @apiParam {Cookie} csrftoken csrftoken para submissao de formularios.
-@apiParam {Cookie} sessionid retornada pela requisicao de login.
 @apiParam {String} texto  Texto de descricao da questao.
 @apiParam {ImageField} imagem=null  Texto de descricao da questao.
 @apiParam {Char} alternativa_correta  Char representando a alternativa correta["A"-"E"].
@@ -164,8 +164,8 @@
 @apiGroup Questao
 
 @apiParam {Header} X-CSRFToken csrftoken para submissao de formularios.
+@apiParam {Header} Authentication Bearer <JWT-Token recebido no login>.
 @apiParam {Cookie} csrftoken csrftoken para submissao de formularios.
-@apiParam {Cookie} sessionid retornada pela requisicao de login.
 @apiSuccess {Number} Questao.id  Id da questao.
 @apiSuccess {String} Questao.texto  Texto da questao.
 @apiSuccess {String} Questao.imagem  Nome do arquivo de imagem enviado pelo user.
@@ -220,8 +220,8 @@
 @apiGroup Questao
 
 @apiParam {Header} X-CSRFToken csrftoken para submissao de formularios.
+@apiParam {Header} Authentication Bearer <JWT-Token recebido no login>.
 @apiParam {Cookie} csrftoken csrftoken para submissao de formularios.
-@apiParam {Cookie} sessionid retornada pela requisicao de login.
 
 @apiSuccessExample {json} Success-Response:
     HTTP/1.1 204 No Content
@@ -249,16 +249,27 @@
 	}
 
 @apiSuccess {Cookie} csrftoken csrftoken para submissao de formularios.
-@apiSuccess {Cookie} sessionid retornada pela requisicao de login.
-@apiSuccess {JWT-token} key Token JWT retornado para o login.
+@apiSuccess {TokenJWT} token Token JWT retornado para o login.
+@apiSuccess {Object[]} user User fields.
+@apiSuccess {Number} user.pk Id do user.
+@apiSuccess {String} user.username Username do user.
+@apiSuccess {String} user.email Email do user.
+@apiSuccess {String} user.first_name Not used.
+@apiSuccess {String} user.last_name Not used.
 
 
 @apiSuccessExample {json} Success-Response:
     HTTP/1.1 204 No Content
-	{
-		"key": "50e041f9514d7febac14b2d71e8a9767fbf8d6ce"
-	}
-
+    {
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMiwidXNlcm5hbWUiOiJicnVubyIsImV4cCI6MTYwNjI1NTUyMywiZW1haWwiOiJiZGFsdmVzQGluZi51ZnNtLmJyIn0.mNiMW2PmMiRj6g9Dg1L7ULEt-yGFuhnjDR14AAvoiTo",
+    "user": {
+        "pk": 22,
+        "username": "user",
+        "email": "mail@mail.com",
+        "first_name": "",
+        "last_name": ""
+    }
+    }
 
 @apiErrorExample {json} Error-Response:
     HTTP/1.1 400 Bad Request
@@ -308,9 +319,26 @@
 		"password2": "hardpassword"
 	}
 
+@apiSuccess {Cookie} csrftoken csrftoken para submissao de formularios.
+@apiSuccess {TokenJWT} token Token JWT retornado para o login.
+@apiSuccess {Object[]} user User fields.
+@apiSuccess {Number} user.pk Id do user.
+@apiSuccess {String} user.username Username do user.
+@apiSuccess {String} user.email Email do user.
+@apiSuccess {String} user.first_name Not used.
+@apiSuccess {String} user.last_name Not used.
+
+
 @apiSuccessExample {json} Success-Response:
-    HTTP/1.1 201 Created
-	{
-		"key": "65dded0d703e1d77ec8c3b25f723fa11ef2aa78d"
-	}
+    HTTP/1.1 204 No Content
+    {
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMiwidXNlcm5hbWUiOiJicnVubyIsImV4cCI6MTYwNjI1NTUyMywiZW1haWwiOiJiZGFsdmVzQGluZi51ZnNtLmJyIn0.mNiMW2PmMiRj6g9Dg1L7ULEt-yGFuhnjDR14AAvoiTo",
+    "user": {
+        "pk": 22,
+        "username": "user",
+        "email": "mail@mail.com",
+        "first_name": "",
+        "last_name": ""
+    }
+    }
 """

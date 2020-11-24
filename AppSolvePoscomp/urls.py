@@ -22,9 +22,14 @@ urlpatterns = [
         TemplateView.as_view(template_name="password_reset_confirm.html"),
         name='password_reset_confirm'),
 
+	# AUTH URLS
 	url(r'^auth/', include('rest_auth.urls')),
 	url(r'^auth/registration/', include('rest_auth.registration.urls')),
 	url(r'^account/', include('allauth.urls')),
+
+	# url(r'^auth/token/', obtain_jwt_token),
+	# url(r'^auth/token/refresh/', refresh_jwt_token),
+	# url(r'^auth/token/verify/', verify_jwt_token),
 
 	#QUESTAO URLS
 	path('questao/', views.questao_list),

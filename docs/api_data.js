@@ -51,24 +51,59 @@ define({ "api": [
           },
           {
             "group": "Success 200",
-            "type": "Cookie",
+            "type": "TokenJWT",
             "optional": false,
-            "field": "sessionid",
-            "description": "<p>retornada pela requisicao de login.</p>"
+            "field": "token",
+            "description": "<p>Token JWT retornado para o login.</p>"
           },
           {
             "group": "Success 200",
-            "type": "JWT-token",
+            "type": "Object[]",
             "optional": false,
-            "field": "key",
-            "description": "<p>Token JWT retornado para o login.</p>"
+            "field": "user",
+            "description": "<p>User fields.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "user.pk",
+            "description": "<p>Id do user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.username",
+            "description": "<p>Username do user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.email",
+            "description": "<p>Email do user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.first_name",
+            "description": "<p>Not used.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.last_name",
+            "description": "<p>Not used.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 204 No Content\n{\n\"key\": \"50e041f9514d7febac14b2d71e8a9767fbf8d6ce\"\n}",
+          "content": "HTTP/1.1 204 No Content\n{\n\"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMiwidXNlcm5hbWUiOiJicnVubyIsImV4cCI6MTYwNjI1NTUyMywiZW1haWwiOiJiZGFsdmVzQGluZi51ZnNtLmJyIn0.mNiMW2PmMiRj6g9Dg1L7ULEt-yGFuhnjDR14AAvoiTo\",\n\"user\": {\n    \"pk\": 22,\n    \"username\": \"user\",\n    \"email\": \"mail@mail.com\",\n    \"first_name\": \"\",\n    \"last_name\": \"\"\n}\n}",
           "type": "json"
         }
       ]
@@ -198,10 +233,70 @@ define({ "api": [
       ]
     },
     "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Cookie",
+            "optional": false,
+            "field": "csrftoken",
+            "description": "<p>csrftoken para submissao de formularios.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "TokenJWT",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Token JWT retornado para o login.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "user",
+            "description": "<p>User fields.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "user.pk",
+            "description": "<p>Id do user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.username",
+            "description": "<p>Username do user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.email",
+            "description": "<p>Email do user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.first_name",
+            "description": "<p>Not used.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.last_name",
+            "description": "<p>Not used.</p>"
+          }
+        ]
+      },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 201 Created\n{\n\"key\": \"65dded0d703e1d77ec8c3b25f723fa11ef2aa78d\"\n}",
+          "content": "HTTP/1.1 204 No Content\n{\n\"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMiwidXNlcm5hbWUiOiJicnVubyIsImV4cCI6MTYwNjI1NTUyMywiZW1haWwiOiJiZGFsdmVzQGluZi51ZnNtLmJyIn0.mNiMW2PmMiRj6g9Dg1L7ULEt-yGFuhnjDR14AAvoiTo\",\n\"user\": {\n    \"pk\": 22,\n    \"username\": \"user\",\n    \"email\": \"mail@mail.com\",\n    \"first_name\": \"\",\n    \"last_name\": \"\"\n}\n}",
           "type": "json"
         }
       ]
@@ -228,17 +323,17 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "Cookie",
+            "type": "Header",
             "optional": false,
-            "field": "csrftoken",
-            "description": "<p>csrftoken para submissao de formularios.</p>"
+            "field": "Authentication",
+            "description": "<p>Bearer <JWT-Token recebido no login>.</p>"
           },
           {
             "group": "Parameter",
             "type": "Cookie",
             "optional": false,
-            "field": "sessionid",
-            "description": "<p>retornada pela requisicao de login.</p>"
+            "field": "csrftoken",
+            "description": "<p>csrftoken para submissao de formularios.</p>"
           }
         ]
       }
@@ -418,17 +513,17 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "Cookie",
+            "type": "Header",
             "optional": false,
-            "field": "csrftoken",
-            "description": "<p>csrftoken para submissao de formularios.</p>"
+            "field": "Authentication",
+            "description": "<p>Bearer <JWT-Token recebido no login>.</p>"
           },
           {
             "group": "Parameter",
             "type": "Cookie",
             "optional": false,
-            "field": "sessionid",
-            "description": "<p>retornada pela requisicao de login.</p>"
+            "field": "csrftoken",
+            "description": "<p>csrftoken para submissao de formularios.</p>"
           },
           {
             "group": "Parameter",
@@ -611,17 +706,17 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "Cookie",
+            "type": "Header",
             "optional": false,
-            "field": "csrftoken",
-            "description": "<p>csrftoken para submissao de formularios.</p>"
+            "field": "Authentication",
+            "description": "<p>Bearer <JWT-Token recebido no login>.</p>"
           },
           {
             "group": "Parameter",
             "type": "Cookie",
             "optional": false,
-            "field": "sessionid",
-            "description": "<p>retornada pela requisicao de login.</p>"
+            "field": "csrftoken",
+            "description": "<p>csrftoken para submissao de formularios.</p>"
           }
         ]
       }
