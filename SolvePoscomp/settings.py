@@ -83,7 +83,7 @@ ROOT_URLCONF = 'SolvePoscomp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["/Users/brunoalves/Documents/aula/Projeto_de_Software/SolvePoscomp/SolvePoscomp-backend/SolvePoscomp/SolvePoscomp/templates"],
+        'DIRS': [str(BASE_DIR) + "/SolvePoscomp/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
