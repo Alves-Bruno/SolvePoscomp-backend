@@ -71,7 +71,7 @@ class validation():
 
 def is_questao_valid(data, questao):
     if questao is None:
-         serializer = QuestaoSerializer(data=data)
+        serializer = QuestaoSerializer(data=data)
     else:
         serializer = QuestaoSerializer(questao, data=data)
     
@@ -184,3 +184,189 @@ def tag_search(request, search):
     if request.method == 'GET':
         serializer = TagSerializer(tag_list, many=True)
         return JsonResponse(serializer.data, safe=False)
+
+
+# Caderno Views:
+#----------------
+# OK 1. Criar um caderno caderno/create/ -> POST
+# OK 2. Editar meu caderno caderno/edit/:id -> PUT
+# OK 3. Deletar meu caderno caderno/delete/:id -> DELETE
+# 4. Adicionar Questões ao caderno: /caderno/:id_caderno/add/:id_questao -> POST
+# 5. Remover Questões do caderno: /caderno/:id_caderno/remove/:id_questao -> POST
+# OK 6. Retornar meus cadernos: caderno/:username
+# Ok 7. Retorna todos os cadernos do banco: caderno/
+
+# Retorna todos os cadernos do banco
+def caderno_get_all(request):
+    if request.method == 'GET':
+        cadernos = Caderno.objects.all()
+        serializer = CadernoSerializer(cadernos, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+# Retorna os cadernos de um usuario: caderno/:username
+def caderno_get_by_user(request, username):
+    
+    if request.method == 'GET':
+        try:
+            user_query = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return JsonResponse({'Error':"Username nao existe."},status=404)
+        
+        cadernos = Caderno.objects.filter(criador_id=user_query.id)
+        serializer = CadernoSerializer(cadernos, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+# Criar um novo caderno: caderno/create
+def caderno_create(request):
+
+    # if request.method == 'GET':
+    #     return HttpResponse("Caderno Create View")
+    # return render(request, 'home.html', {'user': request.user.username})
+
+    if request.method == 'POST':
+        request.user, code = get_user_by_token(request)
+        print(request.user)
+        if request.user.is_authenticated:
+            data = JSONParser().parse(request)
+            data['criador_id'] = request.user.id
+            serializer = CadernoSerializer(data=data)           
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse(serializer.data, status=201)
+            else:
+                return JsonResponse(serializer.errors, status=400)
+        else:
+            return JsonResponse({'Error':"User not logged in. " + code},status=401)
+
+# Editar os campos de um caderno: caderno/edit/:id
+def caderno_edit(request, pk):
+    
+    if request.method == 'PUT':
+        request.user, code = get_user_by_token(request)
+        print(request.user)
+        if request.user.is_authenticated:
+
+            try:
+                caderno = Caderno.objects.get(id=pk)
+            except Caderno.DoesNotExist:
+                return JsonResponse({'Error':"Caderno nao existe."},status=404)
+
+            try:
+                caderno = Caderno.objects.get(id=pk, criador_id=request.user.id)
+            except Caderno.DoesNotExist:
+                return JsonResponse({'Error':"Caderno nao pertence ao usuario" + code},status=404)
+
+            data = JSONParser().parse(request)
+            # print(caderno)
+            # data['criador_id'] = request.user.id
+            serializer = CadernoSerializerPut(caderno, data=data)
+
+            if serializer.is_valid():
+                serializer.save()
+                serializer = CadernoSerializer(caderno)
+                return JsonResponse(serializer.data, status=201)
+            else:
+                return JsonResponse(serializer.errors, status=400)
+        else:
+            return JsonResponse({'Error':"User not logged in. " + code},status=401)
+
+    if request.method == 'GET':
+        try:
+            caderno = Caderno.objects.get(id=pk)
+        except Caderno.DoesNotExist:
+            return JsonResponse({'Error':"Caderno nao existe."},status=404)
+
+        serializer = CadernoSerializer(caderno)
+        return JsonResponse(serializer.data)
+
+    if request.method == 'DELETE':
+        request.user, code = get_user_by_token(request)
+        print(request.user)
+        if request.user.is_authenticated:
+
+            try:
+                caderno = Caderno.objects.get(id=pk)
+            except Caderno.DoesNotExist:
+                return JsonResponse({'Error':"Caderno nao existe."},status=404)
+
+            try:
+                caderno = Caderno.objects.get(id=pk, criador_id=request.user.id)
+            except Caderno.DoesNotExist:
+                return JsonResponse({'Error':"Caderno nao pertence ao usuario"},status=401)
+
+            caderno.delete()
+            return HttpResponse(status=204)
+
+        else:
+            return JsonResponse({'Error':"User not logged in. " + code},status=401)
+
+# Adicionar Questões ao caderno: /caderno/:id_caderno/add/:id_questao
+def caderno_add_questao(request, id_caderno, id_questao):
+    if request.method == 'POST':
+        request.user, code = get_user_by_token(request)
+        print(request.user)
+        if request.user.is_authenticated:
+            try:
+                caderno = Caderno.objects.get(id=id_caderno)
+            except Caderno.DoesNotExist:
+                return JsonResponse({'Error':"Caderno nao existe."},status=404)
+
+            try:
+                caderno = Caderno.objects.get(id=id_caderno, criador_id=request.user.id)
+            except Caderno.DoesNotExist:
+                return JsonResponse({'Error':"Caderno nao pertence ao usuario"},status=401)
+
+            try:
+                questao = Questao.objects.get(id=id_questao)
+            except Questao.DoesNotExist:
+                return JsonResponse({'Error':"Questao nao existe"},status=404)
+
+            # Testa se a questao ja esta no caderno:
+            try:
+                CadQuest = RelacaoCadernoQuestao.objects.get(caderno_id=caderno, questao_id=questao)
+            except RelacaoCadernoQuestao.DoesNotExist:
+                #Se nao estiver, adiciona ao caderno:
+                CadQuest = RelacaoCadernoQuestao(caderno_id=caderno, questao_id=questao)
+                CadQuest.save()
+            
+            serializer = CadernoSerializer(caderno)
+            return JsonResponse(serializer.data)
+
+
+        else:
+            return JsonResponse({'Error':"User not logged in. " + code},status=401)
+
+def caderno_rm_questao(request, id_caderno, id_questao):
+    if request.method == 'DELETE':
+        request.user, code = get_user_by_token(request)
+        print(request.user)
+        if request.user.is_authenticated:
+            try:
+                caderno = Caderno.objects.get(id=id_caderno)
+            except Caderno.DoesNotExist:
+                return JsonResponse({'Error':"Caderno nao existe."},status=404)
+
+            try:
+                caderno = Caderno.objects.get(id=id_caderno, criador_id=request.user.id)
+            except Caderno.DoesNotExist:
+                return JsonResponse({'Error':"Caderno nao pertence ao usuario"},status=401)
+
+            try:
+                questao = Questao.objects.get(id=id_questao)
+            except Questao.DoesNotExist:
+                return JsonResponse({'Error':"Questao nao existe"},status=404)
+
+            # Testa se a questao ja esta no caderno:
+            try:
+                CadQuest = RelacaoCadernoQuestao.objects.get(caderno_id=caderno, questao_id=questao)
+            except RelacaoCadernoQuestao.DoesNotExist:
+                #Se nao estiver, adiciona ao caderno:
+                return JsonResponse({'Error':"Questao nao estava vinculada ao caderno."},status=404)
+
+            
+            CadQuest.delete()
+            serializer = CadernoSerializer(caderno)
+            return JsonResponse(serializer.data, status=200)
+
+        else:
+            return JsonResponse({'Error':"User not logged in. " + code},status=401)

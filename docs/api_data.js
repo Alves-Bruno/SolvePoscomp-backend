@@ -306,6 +306,575 @@ define({ "api": [
     "groupTitle": "Auth"
   },
   {
+    "type": "post",
+    "url": "/caderno/:id_caderno/add/:id_questao",
+    "title": "Adiciona uma nova questao ao caderno.",
+    "name": "CadernoAddQuestao",
+    "group": "Caderno",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Header",
+            "optional": false,
+            "field": "Authentication",
+            "description": "<p>Bearer <JWT-Token recebido no login>.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id do caderno.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nome",
+            "description": "<p>Nome do caderno.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "criador_id",
+            "description": "<p>Id do criador(user) do caderno.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "questoes",
+            "description": "<p>Lista de questoes adicionadas ao caderno.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 Ok\n{\n  \"id\": 5,\n  \"nome\": \"Novo Caderno\",\n  \"descricao\": \"Caderno com questoes maneiras.\",\n  \"criador_id\": 22,\n  \"questoes\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 401 Unauthorized\n{\n  \"Error\": \"User not logged in. Authorization Header required.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 401 Unauthorized\n{\n  \"Error\": \"Caderno nao pertence ao usuario\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n{\n  \"Error\": \"Caderno nao existe.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n{\n  \"Error\": \"Questao nao existe.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n{\n  \"Error\": \"Questao nao estava vinculada ao caderno.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "AppSolvePoscomp/documentation.py",
+    "groupTitle": "Caderno"
+  },
+  {
+    "type": "post",
+    "url": "/caderno/create",
+    "title": "Cria um caderno para o user logado.",
+    "name": "CadernoCreate",
+    "group": "Caderno",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Header",
+            "optional": false,
+            "field": "Authentication",
+            "description": "<p>Bearer <JWT-Token recebido no login>.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "nome",
+            "description": "<p>Nome que o novo caderno deve receber.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "descricao",
+            "description": "<p>Descricao que o novo caderno deve receber.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n\"nome\": \"Novo Caderno\",\n\"descricao\": \"Caderno com questoes maneiras.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id do caderno.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nome",
+            "description": "<p>Nome do caderno.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "criador_id",
+            "description": "<p>Id do criador(user) do caderno.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "questoes",
+            "description": "<p>Lista de questoes adicionadas ao caderno.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 Ok\n{\n  \"id\": 5,\n  \"nome\": \"Novo Caderno\",\n  \"descricao\": \"Caderno com questoes maneiras.\",\n  \"criador_id\": 22,\n  \"questoes\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 401 Unauthorized\n{\n  \"Error\": \"User not logged in. Authorization Header required.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "AppSolvePoscomp/documentation.py",
+    "groupTitle": "Caderno"
+  },
+  {
+    "type": "delete",
+    "url": "/caderno/:id_caderno",
+    "title": "Deleta o caderno do usuario.",
+    "name": "CadernoDelete",
+    "group": "Caderno",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Header",
+            "optional": false,
+            "field": "Authentication",
+            "description": "<p>Bearer <JWT-Token recebido no login>.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 204 No Content\n{\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 401 Unauthorized\n{\n  \"Error\": \"User not logged in. Authorization Header required.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 401 Unauthorized\n{\n  \"Error\": \"Caderno nao pertence ao usuario\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n{\n  \"Error\": \"Caderno nao existe.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "AppSolvePoscomp/documentation.py",
+    "groupTitle": "Caderno"
+  },
+  {
+    "type": "post",
+    "url": "/caderno/:id_caderno",
+    "title": "Altera um dos campos do caderno (nome ou descricao).",
+    "name": "CadernoEdit",
+    "group": "Caderno",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Header",
+            "optional": false,
+            "field": "Authentication",
+            "description": "<p>Bearer <JWT-Token recebido no login>.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "nome",
+            "description": "<p>Nome do caderno.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "descricao",
+            "description": "<p>Descricao do caderno.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n\"nome\":\"Caderno 2020\",\n    \"descricao\":\"Descricao\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id do caderno.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nome",
+            "description": "<p>Nome do caderno.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "criador_id",
+            "description": "<p>Id do criador(user) do caderno.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "questoes",
+            "description": "<p>Lista de questoes adicionadas ao caderno.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 Ok\n{\n  \"id\": 5,\n  \"nome\": \"Novo Caderno\",\n  \"descricao\": \"Caderno com questoes maneiras.\",\n  \"criador_id\": 22,\n  \"questoes\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 401 Unauthorized\n{\n  \"Error\": \"User not logged in. Authorization Header required.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 401 Unauthorized\n{\n  \"Error\": \"Caderno nao pertence ao usuario\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n{\n  \"Error\": \"Caderno nao existe.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "AppSolvePoscomp/documentation.py",
+    "groupTitle": "Caderno"
+  },
+  {
+    "type": "get",
+    "url": "/caderno/",
+    "title": "Retorna todos os cadernos do banco de dados.",
+    "name": "CadernoGetAll",
+    "group": "Caderno",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id do caderno.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nome",
+            "description": "<p>Nome do caderno.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "criador_id",
+            "description": "<p>Id do criador(user) do caderno.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "questoes",
+            "description": "<p>Lista de questoes adicionadas ao caderno.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 Ok\n    {\n[\n  {\n    \"id\": 1,\n    \"nome\": \"Primeiro Caderno\",\n    \"descricao\": \"\",\n    \"criador_id\": 22,\n    \"questoes\": [\n      {\n        \"id\": 1,\n        \"texto\": \"Questão 31 - 2020: Bla bla\",\n        \"imagem\": null,\n        \"alternativa_correta\": \"A\",\n        \"ano\": 2002,\n        \"tags\": [\n          {\n            \"id\": 1,\n            \"nome\": \"Matemática\"\n          },\n          {\n            \"id\": 2,\n            \"nome\": \"Fundamentos da Computação\"\n          },\n          {\n            \"id\": 3,\n            \"nome\": \"Tecnologia da Computação\"\n          }\n        ],\n        \"created_at\": \"2020-11-17T20:58:00.515Z\",\n        \"updated_at\": \"2020-11-20T18:08:38.747Z\",\n        \"user_id\": 22\n      },\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "AppSolvePoscomp/documentation.py",
+    "groupTitle": "Caderno"
+  },
+  {
+    "type": "get",
+    "url": "/caderno/:caderno_id",
+    "title": "Retorna o caderno de acordo com o id fornecido.",
+    "name": "CadernoGetById",
+    "group": "Caderno",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 Ok\n{\n\n    \"id\": 2,\n    \"nome\": \"Caderno 2020\",\n    \"descricao\": \"Caderno com questoes adasdasda.\",\n    \"criador_id\": 22,\n    \"questoes\": []\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n{\n  \"Error\": \"Caderno nao existe.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "AppSolvePoscomp/documentation.py",
+    "groupTitle": "Caderno"
+  },
+  {
+    "type": "get",
+    "url": "/caderno/:username",
+    "title": "Retorna todos os cadernos de um determinado user.",
+    "name": "CadernoGetByUser",
+    "group": "Caderno",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id do caderno.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nome",
+            "description": "<p>Nome do caderno.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "criador_id",
+            "description": "<p>Id do criador(user) do caderno.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "questoes",
+            "description": "<p>Lista de questoes adicionadas ao caderno.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 Ok\n    {\n[\n  {\n    \"id\": 1,\n    \"nome\": \"Primeiro Caderno\",\n    \"descricao\": \"\",\n    \"criador_id\": 22,\n    \"questoes\": [\n      {\n        \"id\": 1,\n        \"texto\": \"Questão 31 - 2020: Bla bla\",\n        \"imagem\": null,\n        \"alternativa_correta\": \"A\",\n        \"ano\": 2002,\n        \"tags\": [\n          {\n            \"id\": 1,\n            \"nome\": \"Matemática\"\n          },\n          {\n            \"id\": 2,\n            \"nome\": \"Fundamentos da Computação\"\n          },\n          {\n            \"id\": 3,\n            \"nome\": \"Tecnologia da Computação\"\n          }\n        ],\n        \"created_at\": \"2020-11-17T20:58:00.515Z\",\n        \"updated_at\": \"2020-11-20T18:08:38.747Z\",\n        \"user_id\": 22\n      },\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n{\n  \"Error\": \"Username nao existe.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "AppSolvePoscomp/documentation.py",
+    "groupTitle": "Caderno"
+  },
+  {
+    "type": "delete",
+    "url": "/caderno/:id_caderno/rm/:id_questao",
+    "title": "Remove uma das questaos (já cadastrada) do caderno.",
+    "name": "CadernoRemoveQuestao",
+    "group": "Caderno",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Header",
+            "optional": false,
+            "field": "Authentication",
+            "description": "<p>Bearer <JWT-Token recebido no login>.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id do caderno.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nome",
+            "description": "<p>Nome do caderno.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "criador_id",
+            "description": "<p>Id do criador(user) do caderno.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "questoes",
+            "description": "<p>Lista de questoes adicionadas ao caderno.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 Ok\n{\n  \"id\": 5,\n  \"nome\": \"Novo Caderno\",\n  \"descricao\": \"Caderno com questoes maneiras.\",\n  \"criador_id\": 22,\n  \"questoes\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 401 Unauthorized\n{\n  \"Error\": \"User not logged in. Authorization Header required.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 401 Unauthorized\n{\n  \"Error\": \"Caderno nao pertence ao usuario\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n{\n  \"Error\": \"Caderno nao existe.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n{\n  \"Error\": \"Questao nao existe.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "AppSolvePoscomp/documentation.py",
+    "groupTitle": "Caderno"
+  },
+  {
     "type": "delete",
     "url": "/questao/:questao_id/",
     "title": "Deleta os dados da questao por id.",

@@ -342,3 +342,355 @@
     }
     }
 """
+
+
+
+"""
+--> CADERNO GET ALL <--
+@api {get} /caderno/ Retorna todos os cadernos do banco de dados.
+@apiName CadernoGetAll
+@apiGroup Caderno
+
+@apiSuccess {Number} id Id do caderno.
+@apiSuccess {String} nome Nome do caderno.
+@apiSuccess {Number} criador_id Id do criador(user) do caderno.
+@apiSuccess {Object[]} questoes Lista de questoes adicionadas ao caderno.
+
+@apiSuccessExample {json} Success-Response:
+    HTTP/1.1 200 Ok
+    {
+[
+  {
+    "id": 1,
+    "nome": "Primeiro Caderno",
+    "descricao": "",
+    "criador_id": 22,
+    "questoes": [
+      {
+        "id": 1,
+        "texto": "Questão 31 - 2020: Bla bla",
+        "imagem": null,
+        "alternativa_correta": "A",
+        "ano": 2002,
+        "tags": [
+          {
+            "id": 1,
+            "nome": "Matemática"
+          },
+          {
+            "id": 2,
+            "nome": "Fundamentos da Computação"
+          },
+          {
+            "id": 3,
+            "nome": "Tecnologia da Computação"
+          }
+        ],
+        "created_at": "2020-11-17T20:58:00.515Z",
+        "updated_at": "2020-11-20T18:08:38.747Z",
+        "user_id": 22
+      },
+    }
+"""
+
+"""
+--> CADERNO GET BY USER <--
+@api {get} /caderno/:username Retorna todos os cadernos de um determinado user.
+@apiName CadernoGetByUser
+@apiGroup Caderno
+
+@apiSuccess {Number} id Id do caderno.
+@apiSuccess {String} nome Nome do caderno.
+@apiSuccess {Number} criador_id Id do criador(user) do caderno.
+@apiSuccess {Object[]} questoes Lista de questoes adicionadas ao caderno.
+
+@apiSuccessExample {json} Success-Response:
+    HTTP/1.1 200 Ok
+    {
+[
+  {
+    "id": 1,
+    "nome": "Primeiro Caderno",
+    "descricao": "",
+    "criador_id": 22,
+    "questoes": [
+      {
+        "id": 1,
+        "texto": "Questão 31 - 2020: Bla bla",
+        "imagem": null,
+        "alternativa_correta": "A",
+        "ano": 2002,
+        "tags": [
+          {
+            "id": 1,
+            "nome": "Matemática"
+          },
+          {
+            "id": 2,
+            "nome": "Fundamentos da Computação"
+          },
+          {
+            "id": 3,
+            "nome": "Tecnologia da Computação"
+          }
+        ],
+        "created_at": "2020-11-17T20:58:00.515Z",
+        "updated_at": "2020-11-20T18:08:38.747Z",
+        "user_id": 22
+      },
+    }
+
+@apiErrorExample {json} Success-Response:
+    HTTP/1.1 404 Not Found
+{
+  "Error": "Username nao existe."
+}
+"""
+
+"""
+--> Caderno by id <--
+@api {get} /caderno/:caderno_id Retorna o caderno de acordo com o id fornecido.
+@apiName CadernoGetById
+@apiGroup Caderno
+
+@apiSuccessExample {json} Success-Response:
+    HTTP/1.1 200 Ok
+    {
+
+        "id": 2,
+        "nome": "Caderno 2020",
+        "descricao": "Caderno com questoes adasdasda.",
+        "criador_id": 22,
+        "questoes": []
+
+    }
+
+@apiErrorExample {json} Success-Response:
+    HTTP/1.1 404 Not Found
+{
+  "Error": "Caderno nao existe."
+}
+"""
+
+"""
+--> CREATE CADERNO <--
+@api {post} /caderno/create Cria um caderno para o user logado.
+@apiName CadernoCreate
+@apiGroup Caderno
+
+@apiParam {Header} Authentication Bearer <JWT-Token recebido no login>.
+@apiParam {String} nome Nome que o novo caderno deve receber.
+@apiParam {String} descricao Descricao que o novo caderno deve receber.
+
+@apiParamExample {json} Request-Example:
+{
+	"nome": "Novo Caderno",
+	"descricao": "Caderno com questoes maneiras."
+}
+
+@apiSuccess {Number} id Id do caderno.
+@apiSuccess {String} nome Nome do caderno.
+@apiSuccess {Number} criador_id Id do criador(user) do caderno.
+@apiSuccess {Object[]} questoes Lista de questoes adicionadas ao caderno.
+
+@apiSuccessExample {json} Success-Response:
+    HTTP/1.1 200 Ok
+{
+  "id": 5,
+  "nome": "Novo Caderno",
+  "descricao": "Caderno com questoes maneiras.",
+  "criador_id": 22,
+  "questoes": []
+}
+
+@apiErrorExample {json} Success-Response:
+    HTTP/1.1 401 Unauthorized
+{
+  "Error": "User not logged in. Authorization Header required."
+}
+"""
+
+"""
+--> CADERNO ADD QUESTAO <--
+@api {post} /caderno/:id_caderno/add/:id_questao Adiciona uma nova questao ao caderno.
+@apiName CadernoAddQuestao
+@apiGroup Caderno
+
+@apiParam {Header} Authentication Bearer <JWT-Token recebido no login>.
+
+@apiSuccess {Number} id Id do caderno.
+@apiSuccess {String} nome Nome do caderno.
+@apiSuccess {Number} criador_id Id do criador(user) do caderno.
+@apiSuccess {Object[]} questoes Lista de questoes adicionadas ao caderno.
+
+@apiSuccessExample {json} Success-Response:
+    HTTP/1.1 200 Ok
+{
+  "id": 5,
+  "nome": "Novo Caderno",
+  "descricao": "Caderno com questoes maneiras.",
+  "criador_id": 22,
+  "questoes": []
+}
+
+@apiErrorExample {json} Success-Response:
+    HTTP/1.1 401 Unauthorized
+{
+  "Error": "User not logged in. Authorization Header required."
+}
+
+@apiErrorExample {json} Success-Response:
+    HTTP/1.1 401 Unauthorized
+{
+  "Error": "Caderno nao pertence ao usuario"
+}
+
+@apiErrorExample {json} Success-Response:
+    HTTP/1.1 404 Not Found
+{
+  "Error": "Caderno nao existe."
+}
+
+@apiErrorExample {json} Success-Response:
+    HTTP/1.1 404 Not Found
+{
+  "Error": "Questao nao existe."
+}
+
+@apiErrorExample {json} Success-Response:
+    HTTP/1.1 404 Not Found
+{
+  "Error": "Questao nao estava vinculada ao caderno."
+}
+"""
+
+"""
+--> CADERNO REMOVE QUESTAO <--
+@api {delete} /caderno/:id_caderno/rm/:id_questao Remove uma das questaos (já cadastrada) do caderno.
+@apiName CadernoRemoveQuestao
+@apiGroup Caderno
+
+@apiParam {Header} Authentication Bearer <JWT-Token recebido no login>.
+
+@apiSuccess {Number} id Id do caderno.
+@apiSuccess {String} nome Nome do caderno.
+@apiSuccess {Number} criador_id Id do criador(user) do caderno.
+@apiSuccess {Object[]} questoes Lista de questoes adicionadas ao caderno.
+
+@apiSuccessExample {json} Success-Response:
+    HTTP/1.1 200 Ok
+{
+  "id": 5,
+  "nome": "Novo Caderno",
+  "descricao": "Caderno com questoes maneiras.",
+  "criador_id": 22,
+  "questoes": []
+}
+
+@apiErrorExample {json} Success-Response:
+    HTTP/1.1 401 Unauthorized
+{
+  "Error": "User not logged in. Authorization Header required."
+}
+
+@apiErrorExample {json} Success-Response:
+    HTTP/1.1 401 Unauthorized
+{
+  "Error": "Caderno nao pertence ao usuario"
+}
+
+@apiErrorExample {json} Success-Response:
+    HTTP/1.1 404 Not Found
+{
+  "Error": "Caderno nao existe."
+}
+
+@apiErrorExample {json} Success-Response:
+    HTTP/1.1 404 Not Found
+{
+  "Error": "Questao nao existe."
+}
+"""
+
+"""
+--> CADERNO EDICAO <--
+@api {post} /caderno/:id_caderno Altera um dos campos do caderno (nome ou descricao).
+@apiName CadernoEdit
+@apiGroup Caderno
+
+@apiParam {Header} Authentication Bearer <JWT-Token recebido no login>.
+@apiParam {String} nome Nome do caderno.
+@apiParam {String} descricao Descricao do caderno.
+
+@apiParamExample {json} Request-Example:
+{
+	"nome":"Caderno 2020",
+    "descricao":"Descricao"
+}
+
+@apiSuccess {Number} id Id do caderno.
+@apiSuccess {String} nome Nome do caderno.
+@apiSuccess {Number} criador_id Id do criador(user) do caderno.
+@apiSuccess {Object[]} questoes Lista de questoes adicionadas ao caderno.
+
+@apiSuccessExample {json} Success-Response:
+    HTTP/1.1 200 Ok
+{
+  "id": 5,
+  "nome": "Novo Caderno",
+  "descricao": "Caderno com questoes maneiras.",
+  "criador_id": 22,
+  "questoes": []
+}
+
+@apiErrorExample {json} Success-Response:
+    HTTP/1.1 401 Unauthorized
+{
+  "Error": "User not logged in. Authorization Header required."
+}
+
+@apiErrorExample {json} Success-Response:
+    HTTP/1.1 401 Unauthorized
+{
+  "Error": "Caderno nao pertence ao usuario"
+}
+
+@apiErrorExample {json} Success-Response:
+    HTTP/1.1 404 Not Found
+{
+  "Error": "Caderno nao existe."
+}
+"""
+
+"""
+--> CADERNO DELETE <--
+@api {delete} /caderno/:id_caderno Deleta o caderno do usuario.
+@apiName CadernoDelete
+@apiGroup Caderno
+
+@apiParam {Header} Authentication Bearer <JWT-Token recebido no login>.
+
+@apiSuccessExample {json} Success-Response:
+    HTTP/1.1 204 No Content
+    {
+
+    }
+
+@apiErrorExample {json} Success-Response:
+    HTTP/1.1 401 Unauthorized
+{
+  "Error": "User not logged in. Authorization Header required."
+}
+
+@apiErrorExample {json} Success-Response:
+    HTTP/1.1 401 Unauthorized
+{
+  "Error": "Caderno nao pertence ao usuario"
+}
+
+@apiErrorExample {json} Success-Response:
+    HTTP/1.1 404 Not Found
+{
+  "Error": "Caderno nao existe."
+}
+"""

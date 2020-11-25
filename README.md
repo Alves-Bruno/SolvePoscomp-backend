@@ -15,3 +15,26 @@
 
 1. Criar o model e gerar o banco de dados
 2. Cadastrar perguntas.
+
+
+"""
+--> INSERT <--
+@api {method} url Descricao.
+@apiName Name
+@apiGroup Group
+
+@apiParam {Type} Descricao.
+
+@apiParamExample {json} Request-Example:
+	{
+		"username": "user",
+	}
+
+@apiSuccess {Type} Descricao.
+
+@apiSuccessExample {json} Success-Response:
+    HTTP/1.1 200 Ok
+    {
+
+    }
+"""

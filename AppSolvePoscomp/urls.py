@@ -40,4 +40,13 @@ urlpatterns = [
 	path('tag/<int:pk>/', views.tag_detail),
 	path('tag/<search>/', views.tag_search),
 
+	# CADERNO URLS
+	path('caderno/', views.caderno_get_all),
+	path('caderno/<username>', views.caderno_get_by_user),
+	path('caderno/create/', views.caderno_create),
+	path('caderno/<int:pk>/', views.caderno_edit),
+	#/caderno/:id_caderno/add/:id_questao
+	path('caderno/<int:id_caderno>/add/<int:id_questao>/', views.caderno_add_questao),
+	path('caderno/<int:id_caderno>/rm/<int:id_questao>/', views.caderno_rm_questao),
+
 ]
