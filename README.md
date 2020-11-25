@@ -1,27 +1,7 @@
 # SolvePoscomp-backend
 
-## Documentação:
-Documentacao [aqui](https://alves-bruno.github.io/SolvePoscomp-backend/).
+## Documentação API-REST:
+Documentação [aqui](https://alves-bruno.github.io/SolvePoscomp-backend/).
 
-
-"""
---> INSERT <--
-@api {method} url Descricao.
-@apiName Name
-@apiGroup Group
-
-@apiParam {Type} Descricao.
-
-@apiParamExample {json} Request-Example:
-	{
-		"username": "user",
-	}
-
-@apiSuccess {Type} Descricao.
-
-@apiSuccessExample {json} Success-Response:
-    HTTP/1.1 200 Ok
-    {
-
-    }
-"""
+## Link para a API:
+Rodando no Heroku: https://solveposcomp.herokuapp.com

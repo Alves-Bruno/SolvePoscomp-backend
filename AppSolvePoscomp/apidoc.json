@@ -3,5 +3,5 @@
   "version": "1.0.0",
   "description": "Usage example of the REST api - Solve Poscomp",
   "title": "App Solve Poscomp",
-  "url" : "https://dashboard.heroku.com/apps/solveposcomp"
+  "url" : "https://solveposcomp.herokuapp.com"
 }
