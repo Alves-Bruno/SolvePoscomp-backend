@@ -9,11 +9,11 @@ from datetime import datetime
 
 class Questao(models.Model):
 	# id = automagically_created
-	texto = models.CharField(max_length=1000)
+	texto = models.CharField(max_length=10000)
 	imagem = models.ImageField(blank=True)
 	alternativa_correta = models.CharField(max_length=1)
 	ano = models.IntegerField()
-	texto_imagem = models.CharField(max_length=1000, blank=True)
+	texto_imagem = models.CharField(max_length=10000, blank=True)
 	user_id = models.ForeignKey(User, on_delete=models.DO_NOTHING)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)

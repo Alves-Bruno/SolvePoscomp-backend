@@ -26,11 +26,11 @@ class Migration(migrations.Migration):
             name='Questao',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('texto', models.CharField(max_length=1000)),
+                ('texto', models.CharField(max_length=10000)),
                 ('imagem', models.ImageField(blank=True, upload_to='')),
                 ('alternativa_correta', models.CharField(max_length=1)),
                 ('ano', models.IntegerField()),
-                ('texto_imagem', models.CharField(blank=True, max_length=1000)),
+                ('texto_imagem', models.CharField(blank=True, max_length=10000)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
             ],
