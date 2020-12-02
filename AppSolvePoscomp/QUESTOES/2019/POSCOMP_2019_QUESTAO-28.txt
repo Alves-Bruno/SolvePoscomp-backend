@@ -1,0 +1,41 @@
+518 EXAME POSCOMP NS 15/8/201910:15:04
+QUESTAO 28 - De acordo com o diagrama de classes UML a seguir, assinale a alternativa correta.
+
+Monitor
+
+marca : String
+
+ 
+
+ 
+
+    
+      
+   
+ 
+
+ 
+
+inito int
+Mouse Computador SmarnTv
+marca : String marca : String marca : String
+initQ : int
+
+ 
+
+ 
+
+ 
+
+marca : String
+
+ 
+
+A) A classe "Monitor" tem uma relação de polimorfismo com a classe "SmartTV".
+B) A classe "Mouse" tem uma relação de composição com a classe "Computador".
+C) A classe "Teclado" é herdada da classe "Computador".
+
+D) O Computador pode ser um computador all in one.
+
+E) A SmartTV é o Monitor do Computador.
+

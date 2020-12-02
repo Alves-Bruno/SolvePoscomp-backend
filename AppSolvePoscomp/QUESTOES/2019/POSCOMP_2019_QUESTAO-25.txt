@@ -1,0 +1,21 @@
+ 
+
+QUESTÃO 25 - Considere a seguinte função em C:
+
+void funcao(int n)(
+int i,j;
+for (i=1; i<=n, i++)
+for(j=1; j<log(i); jt+)
+printf(*Yod”,i+j)
+
+A complexidade dessa função é:
+
+A) 0(n)
+B)o(nlogn)
+C) o(logn)
+D) 0(n?)
+
+E) o(nZlogn)
+
+ 
+

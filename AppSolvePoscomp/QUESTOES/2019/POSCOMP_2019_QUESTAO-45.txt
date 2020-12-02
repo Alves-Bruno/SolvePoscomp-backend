@@ -1,0 +1,34 @@
+ 
+
+QUESTÃO 45 - Considere o programa abaixo escrito em linguagem C. No instante da execução da
+linha 5, ter-se-á uma hierarquia composta de quantos processos e threads, respectivamente?
+
+ 
+
+ 
+
+main0O(
+
+int i;
+
+for(i=0,i<3,i++)
+fork();
+
+while(1);
+
++
+
+DU BUWUNH
+
+ 
+
+Ajl1eo.
+B)3€e0.
+C)4e1.
+D)7e7.
+EB)8e 8.
+
+ 
+
+ 
+

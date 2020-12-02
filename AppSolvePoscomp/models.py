@@ -151,4 +151,3 @@ class Caderno(models.Model):
 		# Se nao esta vinculada, somente retorna
 		else:
 			return False
-

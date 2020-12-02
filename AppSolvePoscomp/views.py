@@ -370,3 +370,10 @@ def caderno_rm_questao(request, id_caderno, id_questao):
 
         else:
             return JsonResponse({'Error':"User not logged in. " + code},status=401)
+
+def image_view(request, image_name):
+
+    image = Questao.objects.get(imagem=image_name).imagem
+    # resized_img = image #Handle resizing here
+
+    return HttpResponse(image, content_type="image/png")

@@ -1,0 +1,40 @@
+ 
+
+QUESTÃO 18 - Encontre a média (u) e o desvio padrão (5) da distribuição:
+
+ 
+
+Xi 1 3 5 7
+P; 0,3 0,1 0,4 0,2
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+u=E(X) =D um;
+
+E(X?) = Dx»;
+
+9º = (MK?) pt
+
+AJu=4,0;0=2,24
+B)u=4,0;0 = 5,00
+C)u=5,0;0 = 25,0
+Dju=3,0;0=4,0
+
+EB)u=4,0;0=21,0
+
+ 
+

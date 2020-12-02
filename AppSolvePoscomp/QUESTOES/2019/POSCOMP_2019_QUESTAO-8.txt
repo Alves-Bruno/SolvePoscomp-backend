@@ -1,0 +1,11 @@
+ 
+
+QUESTÃO 08 - Encontre as coordenadas retangulares do ponto (P), cujas coordenadas polares
+são (3, 120º, 120º, 135º).
+
+x=r+*cosa
+y=r+*cosB
+z=r*cosy
+
+ 
+

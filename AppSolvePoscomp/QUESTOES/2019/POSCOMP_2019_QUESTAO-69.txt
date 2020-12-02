@@ -1,0 +1,13 @@
+518 EXAME POSCOMP NS 15/8/201910:15:04
+QUESTÃO 69 - Sobre a regra de Bayes, é correto afirmar que:
+
+A) Trata-se de uma ampliação do conceito de busca probabilística.
+
+B) Refere-se a uma regra lógico-indutiva.
+
+C) Utiliza a probabilidade de um evento a partir do conhecimento a priori.
+D) Associa-se à probabilidade de que não deve estar relacionada ao evento.
+E) Descreve a precisão de eventos medindo a proporção dos resultados.
+
+ 
+

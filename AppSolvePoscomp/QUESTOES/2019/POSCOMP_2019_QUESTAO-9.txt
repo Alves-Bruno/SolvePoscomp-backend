@@ -1,0 +1,19 @@
+518 EXAME POSCOMP NS 15/8/201910:15:04
+QUESTAO 09 - Simplifique, com a ajuda dos Mapas de Karnaugh, a função cuja expressão em termos
+canônicos é: f(x,y,7) = 5) m(2,3,4,5,6,7)
+
+ND fXYLD=X+Y
+
+BIfX,Y,ZD)=X+Y+Z
+OFXYD=X+Y
+D)f(X,Y,Z)=Xv+Y
+DB) fXY,ZD=X+Y+Z
+
+ 
+
+ 
+
+ 
+
+ 
+

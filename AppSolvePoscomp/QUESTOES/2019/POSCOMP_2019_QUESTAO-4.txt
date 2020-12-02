@@ -1,0 +1,5 @@
+ 
+
+QUESTÃO 04 - Encontre as coordenadas do centro (C) da circunferência de equação
+t;x2+y2-3x+ 5y -14 =0.
+

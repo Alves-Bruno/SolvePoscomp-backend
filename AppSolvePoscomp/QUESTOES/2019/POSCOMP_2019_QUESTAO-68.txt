@@ -1,0 +1,20 @@
+ 
+
+QUESTÃO 68 - Assinale a alternativa que apresenta a quantidade mínima de registradores
+necessários para se fazer a alocação no código apresentado abaixo:
+
+ti := a - mem[...]
+t2 d/ memf[...]
+t3 t2 + memf...]
+t4:=ti +t3
+
+ 
+
+A) 6
+B)5
+c)4
+D)3
+E) 2
+
+ 
+

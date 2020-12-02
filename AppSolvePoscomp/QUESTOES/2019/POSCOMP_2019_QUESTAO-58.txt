@@ -1,0 +1,12 @@
+ 
+
+QUESTÃO 58 - Como se denomina uma fonte de luz que esteja a uma distância infinita de uma cena,
+gerando uma iluminação similar à da luz do Sol?
+
+A) Pontual.
+B) Ambiente.
+C) Direcional.
+D) Spot.
+
+E) Difusa.
+

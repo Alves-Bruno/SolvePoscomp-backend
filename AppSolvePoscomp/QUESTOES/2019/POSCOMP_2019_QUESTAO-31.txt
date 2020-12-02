@@ -1,0 +1,16 @@
+518 EXAME POSCOMP NS 15/8/201910:15:04
+QUESTAO 31 - De acordo com a Teoria de Sistema de Tipos, classifique a função a seguir:
+
+int soma(int x,int y) (
+return x+y;
+
+)
+
+A) Função Somadora.
+
+B) Função Polimórfica.
+
+C) Função Monomórfica.
+D) Função Sobrecarregada.
+E) Função Abstrata.
+

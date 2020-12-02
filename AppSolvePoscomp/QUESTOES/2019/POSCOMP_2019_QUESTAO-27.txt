@@ -1,0 +1,30 @@
+ 
+
+QUESTÃO 27 - Considere o seguinte código em Linguagem C abaixo:
+
+intx=3,y=1,2=-5, W=-2;
+
+inti;
+for (i=1; i<x; i++)
+while (z<0)(
+++i;
+Z++;
+doí
+x=x+3;
+W++;
+while (w<0);
+>
+>
+
+printf("Yd Y%d Y%d Yd", x, y, Z, W);
+
+Assinale a alternativa que corresponde à saída impressa na tela.
+
+A)21104
+B)31-5-2
+C)20-4-1
+D)90-3-2
+EB)1092
+
+ 
+

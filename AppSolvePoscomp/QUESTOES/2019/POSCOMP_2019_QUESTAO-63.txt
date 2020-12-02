@@ -1,0 +1,51 @@
+ 
+
+QUESTÃO 63 - Considere o esquema de tradução dirigida pela sintaxe apresentado a seguir, no qual
+
+as produções da gramática foram numeradas:
+
+ 
+
+ 
+
+ 
+
+ 
+
+Produções Ações Semânticas
+
+9)L>En L.val = E.val
+
+DES E+T E.val = Es.val + T.val
+
+3)E5ST E.val = T.val
+
+49)T5>5Th*F T.val = Ti.val * F.val
+
+5)T>S>F T.val = F.val
+
+6 F> (E) F.val = E.val
+
+D)F-> digit F.val = digit.lexval
+
+ 
+
+Assinale a alternativa correta sobre o esquema.
+
+A) Na produção 4,
+B) Na produção 4,
+C) Na produção 5,
+D) Na produção 2,
+
+E) Na produção 2, Eir.val é sintetizado e T.val é herdado.
+
+T.val e F.val são sintetizados.
+
+Ti. val é herdado.
+
+T.val e F.val são herdados.
+
+E.val é sintetizado e T.val é herdado.
+
+ 
+

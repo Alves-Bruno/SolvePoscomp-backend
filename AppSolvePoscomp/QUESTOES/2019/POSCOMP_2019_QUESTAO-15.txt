@@ -1,0 +1,12 @@
+ 
+
+QUESTÃO 15 - A expressão lógica =q > —p é equivalente a:
+
+A)-pA-q
+B)-pvq
+CO -p>q
+D)p>-q
+EB)qg>p
+
+ 
+

@@ -1,0 +1,15 @@
+ 
+
+QUESTÃO 03 - Encontre a equação da reta s, que passa pelo ponto A(3, 4) e que é perpendicular à
+retar:x+y-5=0.
+
+A)r:5x-2y+2=0
+B)rx+y+4=
+C)r:2x+y =0
+D)r:x-y+1=0
+E)jrx-3y+2=0
+
+0
+
+ 
+

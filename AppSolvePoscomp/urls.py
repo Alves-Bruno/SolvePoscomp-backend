@@ -35,6 +35,8 @@ urlpatterns = [
 	path('questao/', views.questao_list),
 	path('questao/<int:pk>/', views.questao_detail),
 
+	path('questao/image/<image_name>', views.image_view),
+
 	# TAG URLS
 	path('tag/', views.tag_list),
 	path('tag/<int:pk>/', views.tag_detail),

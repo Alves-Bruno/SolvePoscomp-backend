@@ -1,0 +1,17 @@
+ 
+
+QUESTÃO 52 - Dentre os algoritmos para mineração de dados, um exemplo de algoritmo para o
+particionamento de dados pelo aprendizado não supervisionado, que não usa uma amostra de
+treinamento pré-classificada, é denominado algoritmo de:
+
+A) Crescimento padrão frequente.
+B) Agrupamento k-means.
+
+C) Amostragem.
+
+D) Associação negativa.
+
+E) Arvore padrão frequente.
+
+ 
+

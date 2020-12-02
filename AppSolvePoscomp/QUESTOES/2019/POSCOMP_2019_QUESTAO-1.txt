@@ -1,0 +1,16 @@
+518 EXAME POSCOMP NS 15/8/201910:15:04
+
+MATEMÁTICA
+
+- 2 3/5
+
+QUESTAO 01 - Seja uma matriz quadrada de terceira ordem 4 = ( 71 5) calcule o determinante:
+17 19 23
+
+A) Det A = -78
+B) Det A = -84
+C) Det A = 84
+D) Det A = 78
+
+E) Det A = -87
+

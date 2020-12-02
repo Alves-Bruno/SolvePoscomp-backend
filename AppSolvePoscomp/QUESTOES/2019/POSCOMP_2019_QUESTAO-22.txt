@@ -1,0 +1,16 @@
+518 EXAME POSCOMP NS 15/8/201910:15:04
+QUESTAO 22 - Considere as seguintes funções:
+
+Ff) =2"
+g()=n!
+A(n) = nom
+Assinale a alternativa correta a respeito do comportamento assintótico de f(n), g(n) e h(n).
+
+A) FG) = 0(g()); gn) = O(h(n)).
+B) fm) = 9(g(M)); g(m) = O(h(n)).
+C) 9(m) = (Fm); hn) = (Fm).
+D) h(n) = (FM); gm) = N(F(m)).
+E) Nenhuma das anteriores.
+
+ 
+

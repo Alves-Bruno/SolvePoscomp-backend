@@ -1,0 +1,70 @@
+1_A_Álgebra Linear
+2_B_Álgebra Linear
+3_D_Geometria Analítica
+4_E_Geometria Analítica
+5_E_Calculo Diferencial E Integral
+6_B_Calculo Diferencial E Integral
+7_D_Álgebra Linear
+8_A_Geometria Analítica
+9_A_Matemática Discreta
+10_C_Calculo Diferencial E Integral
+11_C_Lógica Matemática
+12_B_Lógica Matemática
+13_C_Análise Combinatória
+14_E_Matemática Discreta
+15_B_Lógica Matemática
+16_B_Matemática Discreta
+17_C_Análise Combinatória
+18_A_Probabilidade E Estatística
+19_D_Análise Combinatória
+20_E_Probabilidade E Estatística
+21_A_Análise de Algoritmos
+22_D_Análise de Algoritmos
+23_B_Algoritmos E Estrutura de Dados
+24_C_Algoritmos E Estrutura de Dados
+25_B_Análise de Algoritmos
+26_D_Algoritmos E Estrutura de Dados
+27_A_Linguagens de Programação
+28_*_Linguagens de Programação
+29_E_Organização de Arquivos E Dados
+30_D_Técnicas de Programação
+31_C_Linguagens de Programação
+32_D_Teoria dos Grafos
+33_A_Técnicas de Programação
+34_B_Organização de Arquivos E Dados
+35_D_Organização de Arquivos E Dados
+36_C_Teoria dos Grafos
+37_B_Teoria dos Grafos
+38_E_Técnicas de Programação
+39_C_Linguagens Formais, Autômatos E Computabilidade
+40_E_Linguagens Formais, Autômatos E Computabilidade
+41_B_Linguagens Formais, Autômatos E Computabilidade
+42_A_Circuitos Digitais
+43_D_Circuitos Digitais
+44_C_Arquitetura E Organização de Computadores
+45_E_Sistemas Operacionais
+46_D_Sistemas Operacionais
+47_B_Circuitos Digitais
+48_B_Arquitetura E Organização de Computadores
+49_B_Arquitetura E Organização de Computadores
+50_C_Sistemas Operacionais
+51_E_Banco de Dados
+52_B_Banco de Dados
+53_E_Engenharia de Software
+54_B_Redes de Computadores
+55_A_Banco de Dados
+56_D_Engenharia de Software
+57_B_Computação Gráfica
+58_C_Computação Gráfica
+59_E_Processamento de Imagens
+60_C_Redes de Computadores
+61_B_Processamento de Imagens
+62_C_Sistemas Distribuídos
+63_A_Compiladores
+64_A_Sistemas Distribuídos
+65_A_Redes de Computadores
+66_C_Inteligência Artificial
+67_E_Sistemas Distribuídos
+68_E_Compiladores
+69_C_Inteligência Artificial
+70_D_Engenharia de Software

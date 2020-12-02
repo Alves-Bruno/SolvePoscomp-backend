@@ -182,4 +182,6 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
 }
 
+MEDIA_ROOT = str(BASE_DIR) + "/SolvePoscomp/media"
+
 django_heroku.settings(locals())

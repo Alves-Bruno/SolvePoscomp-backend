@@ -1,0 +1,18 @@
+ 
+
+QUESTÃO 49 - Em uma máquina de 32 bits, subdividimos o endereço virtual em 4 segmentos da
+
+seguinte maneira:
+
+Uma tabela de páginas de 3 níveis é utilizada, de modo que os primeiros 10 bits são para o primeiro
+nível e assim por diante. Sendo assim, qual é o tamanho de uma tabela de páginas para um processo
+que tem 256K de memória iniciando no endereço 0?
+
+A) 6480 bytes.
+B) 4608 bytes.
+C) 3240 bytes.
+D) 2408 bytes.
+E) 1020 bytes.
+
+ 
+
