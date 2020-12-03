@@ -35,7 +35,8 @@ urlpatterns = [
 	path('questao/', views.questao_list),
 	path('questao/<int:pk>/', views.questao_detail),
 
-	path('questao/image/<image_name>', views.image_view),
+	path('questao/<int:pk>/imagem/', views.questao_send_image),
+	path('questao/imagem/<image_name>', views.image_view),
 
 	# TAG URLS
 	path('tag/', views.tag_list),
@@ -51,4 +52,6 @@ urlpatterns = [
 	path('caderno/<int:id_caderno>/add/<int:id_questao>/', views.caderno_add_questao),
 	path('caderno/<int:id_caderno>/rm/<int:id_questao>/', views.caderno_rm_questao),
 
+	# SEARCH VIEW
+	path('search/', views.search_view),
 ]

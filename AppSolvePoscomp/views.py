@@ -43,9 +43,11 @@ def get_user_by_token(request):
         # raise exceptions.AuthenticationFailed('Your token is expired,login')
         return AnonymousUser(), 'JWT Token has expired.'
 
+    # print(user)
     return User.objects.get(username=payload["username"]), 'Authenticated'
 
 # @login_required
+# @csrf_exempt
 def index(request):
 
     # payload = get_user_by_token(request.headers['Authorization'])
@@ -53,14 +55,14 @@ def index(request):
     # print("payload")
     # print(payload)
 
-    request.user, code = get_user_by_token(request)
-    print(request.user)
-    print(type(request.user))
+    # request.user, code = get_user_by_token(request)
+    # print(request.user)
+    # print(type(request.user))
 
-    if request.user.is_authenticated:
-        print("AUTENTICADOoOOOOOOOOOOOO")
+    # if request.user.is_authenticated:
+        # print("AUTENTICADOoOOOOOOOOOOOO")
 
-    return render(request, 'home.html', {'user': request.user.username})
+    return render(request, 'home.html')
 
 class validation():
     data = ''
@@ -90,6 +92,7 @@ def is_questao_valid(data, questao):
     return False, serializer
 
 ## QUESTAO VIEWS
+# @csrf_exempt
 @csrf_exempt
 def questao_list(request):
 
@@ -102,6 +105,7 @@ def questao_list(request):
         request.user, code = get_user_by_token(request)
         if request.user.is_authenticated:
             data = JSONParser().parse(request)
+            data['user_id'] = request.user.id
             questao_valid, serializer = is_questao_valid(data, None)           
             if questao_valid:
                 return JsonResponse(serializer.data, status=201)
@@ -110,6 +114,40 @@ def questao_list(request):
         else:
             return JsonResponse({'Error':"User not logged in. " + code},status=401)
 
+@csrf_exempt
+def image_view(request, image_name):
+
+    image = Questao.objects.get(imagem=image_name).imagem
+    # resized_img = image #Handle resizing here
+
+    return HttpResponse(image, content_type="image/png")
+
+@csrf_exempt
+def questao_send_image(request, pk):
+    """
+    Retrieve, update or delete a code snippet.
+    """
+    print(request.user)
+
+    try:
+        questao = Questao.objects.get(id=pk)
+    except Questao.DoesNotExist:
+        return HttpResponse(status=404)
+
+    # @login_required
+    request.user, code = get_user_by_token(request)
+    if request.user.is_authenticated:
+        # Checking if the question belongs to the user
+        if questao.user_id.id == request.user.id:
+            if request.method == 'POST':
+
+                image_file = request.FILES['imagem']
+                print(request.POST.keys())
+                # print(request.FILES)
+                # print(request.DATA)
+                # questao.imagem.save('teste.png',image_file)
+                questao.imagem.save(str(request.user.username) + '_' + str(pk) +'.png',image_file)
+                return JsonResponse({'message':'Image uploaded.'}, status=201)
 
 @csrf_exempt
 def questao_detail(request, pk):
@@ -134,6 +172,7 @@ def questao_detail(request, pk):
         if questao.user_id.id == request.user.id:
             if request.method == 'PUT':
                 data = JSONParser().parse(request)
+                data['user_id'] = request.user.id
                 
                 questao_valid, serializer = is_questao_valid(data, questao)           
                 if questao_valid:
@@ -197,6 +236,7 @@ def tag_search(request, search):
 # Ok 7. Retorna todos os cadernos do banco: caderno/
 
 # Retorna todos os cadernos do banco
+@csrf_exempt
 def caderno_get_all(request):
     if request.method == 'GET':
         cadernos = Caderno.objects.all()
@@ -204,6 +244,7 @@ def caderno_get_all(request):
         return JsonResponse(serializer.data, safe=False)
 
 # Retorna os cadernos de um usuario: caderno/:username
+@csrf_exempt
 def caderno_get_by_user(request, username):
     
     if request.method == 'GET':
@@ -217,6 +258,7 @@ def caderno_get_by_user(request, username):
         return JsonResponse(serializer.data, safe=False)
 
 # Criar um novo caderno: caderno/create
+@csrf_exempt
 def caderno_create(request):
 
     # if request.method == 'GET':
@@ -239,6 +281,7 @@ def caderno_create(request):
             return JsonResponse({'Error':"User not logged in. " + code},status=401)
 
 # Editar os campos de um caderno: caderno/edit/:id
+@csrf_exempt
 def caderno_edit(request, pk):
     
     if request.method == 'PUT':
@@ -301,6 +344,7 @@ def caderno_edit(request, pk):
             return JsonResponse({'Error':"User not logged in. " + code},status=401)
 
 # Adicionar Questões ao caderno: /caderno/:id_caderno/add/:id_questao
+@csrf_exempt
 def caderno_add_questao(request, id_caderno, id_questao):
     if request.method == 'POST':
         request.user, code = get_user_by_token(request)
@@ -336,6 +380,7 @@ def caderno_add_questao(request, id_caderno, id_questao):
         else:
             return JsonResponse({'Error':"User not logged in. " + code},status=401)
 
+@csrf_exempt
 def caderno_rm_questao(request, id_caderno, id_questao):
     if request.method == 'DELETE':
         request.user, code = get_user_by_token(request)
@@ -371,9 +416,36 @@ def caderno_rm_questao(request, id_caderno, id_questao):
         else:
             return JsonResponse({'Error':"User not logged in. " + code},status=401)
 
-def image_view(request, image_name):
 
-    image = Questao.objects.get(imagem=image_name).imagem
-    # resized_img = image #Handle resizing here
+@csrf_exempt
+def search_view(request):
+    if request.method == 'GET':
+        # f_param = request.GET.get('f', '')
+        # q_param = request.GET
+        
+        keys = request.GET.keys()
 
-    return HttpResponse(image, content_type="image/png")
+        if 'f' in keys:
+            url_query = request.GET.get('f', '')
+            print(url_query)
+            tags_to_search = url_query.split('area~')[1:]
+
+            print(tags_to_search)
+
+            tag_id = int(tags_to_search[0])
+            tag_obj = get_object_or_404(Tag, id=tag_id)
+            query_set = QuestaoTags.objects.filter(tag_id=tag_obj)
+            print(query_set)
+
+            for tag in tags_to_search[1:]:
+                tag_id = int(tag)
+                tag_obj = get_object_or_404(Tag, id=tag_id)
+                query_set = query_set.filter(tag_id=tag_obj)
+            
+            # print(query_set)
+            for a in query_set:
+                print(a)
+                print('')
+
+        # print(keys)
+        return JsonResponse({"Message":"Bombou"}, status=200)

@@ -89,7 +89,8 @@ class QuestaoSerializer(serializers.ModelSerializer):
 	tags = serializers.ReadOnlyField()
 	created_at = serializers.ReadOnlyField()
 	updated_at = serializers.ReadOnlyField()
-
+	id = serializers.ReadOnlyField()
+	
 	class Meta:
 		model= Questao
 		fields= ['id', 'texto', 'imagem', 'alternativa_correta', 'ano', "tags", 'created_at', 'updated_at', 'user_id']
