@@ -33,6 +33,7 @@ urlpatterns = [
 
 	#QUESTAO URLS
 	path('questao/', views.questao_list),
+	path('questao/multipart/', views.questao_multipart),
 	path('questao/<int:pk>/', views.questao_detail),
 
 	path('questao/<int:pk>/imagem/', views.questao_send_image),
@@ -40,6 +41,7 @@ urlpatterns = [
 
 	# TAG URLS
 	path('tag/', views.tag_list),
+	path('subtags/', views.tag_list_by_set),
 	path('tag/<int:pk>/', views.tag_detail),
 	path('tag/<search>/', views.tag_search),
 

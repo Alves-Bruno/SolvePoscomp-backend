@@ -27,6 +27,8 @@ from django.contrib.auth.models import User
 from rest_framework import authentication, exceptions
 from django.contrib.auth.models import AnonymousUser
 
+import ast
+
 def get_user_by_token(request):
     if "Authorization" not in request.headers:
         return AnonymousUser(), 'Authorization Header required.'
@@ -80,16 +82,16 @@ def is_questao_valid(data, questao):
     if serializer.is_valid():
         q_created = serializer.save()
         if 'tags' not in data.keys():
-            return False, validation('', {'tags':["This field is required."]})
+            return [False, validation('', {'tags':["This field is required."]}), None]
         if type(data['tags']) is not list:
-            return False, validation('', {'tags':["This field must be a list of strings."]})
+            return [False, validation('', {'tags':["This field must be a list of strings."]}), None]
         for each_field in data['tags']:
             if type(each_field) is not str:
-                return False, validation('', {'tags':["This field must be a list of strings: "+str(each_field)+" is not a string."]})
+                return [False, validation('', {'tags':["This field must be a list of strings: "+str(each_field)+" is not a string."]}), None]
         q_created.add_tags(data['tags'])
         q_created.save()
-        return True, serializer
-    return False, serializer
+        return [True, serializer, q_created]
+    return [False, serializer, None]
 
 ## QUESTAO VIEWS
 # @csrf_exempt
@@ -106,7 +108,7 @@ def questao_list(request):
         if request.user.is_authenticated:
             data = JSONParser().parse(request)
             data['user_id'] = request.user.id
-            questao_valid, serializer = is_questao_valid(data, None)           
+            questao_valid, serializer, _ = is_questao_valid(data, None)           
             if questao_valid:
                 return JsonResponse(serializer.data, status=201)
             else:
@@ -150,6 +152,33 @@ def questao_send_image(request, pk):
                 return JsonResponse({'message':'Image uploaded.'}, status=201)
 
 @csrf_exempt
+def questao_multipart(request):
+    if request.method == 'POST':
+        request.user, code = get_user_by_token(request)
+        if request.user.is_authenticated:
+
+            # print(request)
+            # print(request.POST.dict())
+            # return JsonResponse({}, status=200) 
+
+            # data = JSONParser().parse(request.POST)
+            data = request.POST.dict()
+            data['user_id'] = request.user.id
+            data['tags'] = ast.literal_eval(data['tags'])
+            questao_valid, serializer, questao = is_questao_valid(data, None)           
+            if questao_valid:
+                if 'image' in request.FILES.keys():
+                    image_file = request.FILES['image']
+                    questao.imagem.save(str(request.user.username) + '_' + str(questao.id) +'.png',image_file)
+                
+                return JsonResponse(serializer.data, status=201)
+            else:
+                return JsonResponse(serializer.errors, status=400)
+        else:
+            return JsonResponse({'Error':"User not logged in. " + code},status=401)
+
+
+@csrf_exempt
 def questao_detail(request, pk):
     """
     Retrieve, update or delete a code snippet.
@@ -174,7 +203,7 @@ def questao_detail(request, pk):
                 data = JSONParser().parse(request)
                 data['user_id'] = request.user.id
                 
-                questao_valid, serializer = is_questao_valid(data, questao)           
+                questao_valid, serializer, _ = is_questao_valid(data, questao)           
                 if questao_valid:
                     return JsonResponse(serializer.data, status=201)
                 else:
@@ -198,6 +227,40 @@ def tag_list(request):
         tags = Tag.objects.all()
         serializer = TagSerializer(tags, many=True)
         return JsonResponse(serializer.data, safe=False)
+
+## TAG VIEWS
+# [
+#   {
+#     name: 'tag principal1',
+#     subtags: [
+#       'tag secundária 1',
+#       'tag secundária 2',
+#       ...
+#     ]
+#   },
+#   ...
+# ]
+@csrf_exempt
+def tag_list_by_set(request):
+    """
+    List all code snippets, or create a new snippet.
+    """
+    if request.method == 'GET':
+        tags = Tag.objects.all()
+        serializer = TagSerializer(tags, many=True)
+        # data = JSONParser().parse(serializer)
+
+        data = serializer.data
+
+        subtags_mat = data[3:11]
+        subtags_fun = data[11:21]
+        subtags_tec = data[21:29]
+
+        return_list = [{'nome':data[0]['nome'], 'id':data[0]['id'], 'subtags': subtags_mat}, 
+                        {'nome':data[1]['nome'], 'id':data[1]['id'], 'subtags': subtags_fun}, 
+                        {'nome':data[2]['nome'], 'id':data[2]['id'], 'subtags': subtags_tec}]
+
+        return JsonResponse(return_list, safe=False)
 
 @csrf_exempt
 def tag_detail(request, pk):
@@ -420,32 +483,42 @@ def caderno_rm_questao(request, id_caderno, id_questao):
 @csrf_exempt
 def search_view(request):
     if request.method == 'GET':
-        # f_param = request.GET.get('f', '')
-        # q_param = request.GET
-        
+
         keys = request.GET.keys()
 
+        # Search for tags:
         if 'f' in keys:
             url_query = request.GET.get('f', '')
             print(url_query)
             tags_to_search = url_query.split('area~')[1:]
 
-            print(tags_to_search)
-
+            # Busca questaos com a primeira tag
             tag_id = int(tags_to_search[0])
             tag_obj = get_object_or_404(Tag, id=tag_id)
-            query_set = QuestaoTags.objects.filter(tag_id=tag_obj)
-            print(query_set)
-
+            query_set = set([x.questao_id for x in QuestaoTags.objects.filter(tag_id=tag_obj)])
+        
+            # Busca questoes para as tags seguintes
             for tag in tags_to_search[1:]:
+                if len(query_set) == 0:
+                    return JsonResponse({"Message":"Nenhuma questao encontrada"}, status=200)
+
+                to_remove = []
                 tag_id = int(tag)
                 tag_obj = get_object_or_404(Tag, id=tag_id)
-                query_set = query_set.filter(tag_id=tag_obj)
-            
-            # print(query_set)
-            for a in query_set:
-                print(a)
-                print('')
+                now_query_set = set([x.questao_id for x in QuestaoTags.objects.filter(tag_id=tag_obj)])
+
+                if len(now_query_set) < len(query_set):
+                    aux = query_set
+                    query_set = now_query_set
+                    now_query_set = aux
+
+                for questao_id in query_set:
+                    if questao_id not in now_query_set:
+                        to_remove.append(questao_id)
+
+                for delete_item in to_remove:
+                    query_set.remove(delete_item)
 
         # print(keys)
-        return JsonResponse({"Message":"Bombou"}, status=200)
+        serializer = QuestaoSerializer(query_set, many=True)
+        return JsonResponse(serializer.data,safe=False,status=200)
