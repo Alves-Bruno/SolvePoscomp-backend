@@ -1,20 +1,8 @@
-518 EXAME POSCOMP NS 15/8/201910:15:04
-
 QUESTÃO 50 —- Uma partição de disco rígido é formatada com um sistema de arquivos com base em
 alocação encadeada, usando tabela de alocação. A formatação da partição considerou um tamanho
 de bloco (cluster) de 4096 bytes. Um programa executado nesse computador cria um arquivo nessa
 partição e grava os dados do arquivo de acordo com o trecho de código abaixo. Como resultado, o
-arquivo criado contém bytes e ocupa bytes na área de dados do sistema de arquivos.
-
- 
-
- 
-
-05 char dado;
-
-25 for(i=0,i<1024,i++)
-27 write(fd, &dado, 1);
-28 close(fd);
+arquivo criado contém _____ bytes e ocupa _____ bytes na área de dados do sistema de arquivos.
 
  
 
@@ -25,6 +13,3 @@ B) 1025 - 1025
 C) 1024 - 4096
 D) 1025 - 4096
 E) 4096 - 4096
-
- 
-

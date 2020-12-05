@@ -1,5 +1,3 @@
- 
-
 QUESTÃO 64 - Uma transação, em sistemas distribuídos, pode ser construída com base em uma
 quantidade de subtransações. A transação do nível mais alto pode se ramificar e gerar “filhos”, que
 são executados em paralelo, em máquinas diferentes, para obter ganho de desempenho ou simplificar
@@ -7,10 +5,6 @@ a programação. Esse é um exemplo de:
 
 A) Transação aninhada.
 B) Isolamento.
-
 C) Transação isolada.
 D) Transação atômica.
 E) Durabilidade.
-
- 
-

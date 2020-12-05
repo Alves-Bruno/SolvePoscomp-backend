@@ -1,14 +1,9 @@
- 
-
 QUESTÃO 42 - Assinale a alternativa que apresenta a expressão simplificada equivalente ao circuito
 lógico abaixo:
 
-A)S=ABC
-B)S=ABC
-C)S=ABC
-D)S=ABC
+A)S=!ABC
+B)S=A!BC
+C)S=AB!C
+D)S=!AB!C
+E)S=!A!B!C
 
-E)S=ABC
-
- 
-

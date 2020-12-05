@@ -1,13 +1,7 @@
-518 EXAME POSCOMP NS 15/8/201910:15:04
-
-QUESTÃO 19 - De quantas maneiras diferentes é possível formar uma equipe de ginástica olímpica
-com precisamente 3 ginastas mulheres e 4 ginastas homens, escolhidos a partir de uma delegação
-com 15 pessoas, das quais 8 são homens e 7 são mulheres?
+QUESTÃO 19 - De quantas maneiras diferentes é possível formar uma equipe de ginástica olímpica com precisamente 3 ginastas mulheres e 4 ginastas homens, escolhidos a partir de uma delegação com 15 pessoas, das quais 8 são homens e 7 são mulheres?
 
 A) 91.
 B) 105.
-
 C) 1.960.
 D) 2.450.
 E) 5.460.
-

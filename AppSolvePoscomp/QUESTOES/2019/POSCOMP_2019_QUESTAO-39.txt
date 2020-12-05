@@ -1,21 +1,17 @@
-518 EXAME POSCOMP NS 15/8/201910:15:04
-
 QUESTÃO 39 - Seja M uma máquina de Turing sobre alfabeto X. Denotamos por ACEITA(M) o
-conjunto de palavras aceitas por M. Uma linguagem L € X* é denominada Turing-reconhecível quando
+conjunto de palavras aceitas por M. Uma linguagem L contido em X* é denominada Turing-reconhecível quando
 existe uma Máquina de Turing M tal que L = ACEITA(M). Usaremos TR(L) para denotar que a
-
 linguagem L é Turing-reconhecível. Nesse sentido, analise as seguintes afirmações sobre duas
-linguagens Li e L2 sobre o alfabeto >:
+linguagens Li e L2 sobre o alfabeto X:
 
 I. Se TR(L1) e TR(L2), então TR(L1 U L2).
-II. Se TR(L1), então TR(X*1 L1).
-III. Se TR(L1) e TR(L2), então TR(L1 N L2).
+II. Se TR(L1), então TR(X*\ L1).
+III. Se TR(L1) e TR(L2), então TR(L1 intercecção L2).
 
 Quais estão corretas?
 
 A) Apenas I.
 B) Apenas II.
 C) Apenas I e III.
-D) Apenas Il e III.
-B)I Ile III.
-
+D) Apenas II e III.
+E)I, II e III.

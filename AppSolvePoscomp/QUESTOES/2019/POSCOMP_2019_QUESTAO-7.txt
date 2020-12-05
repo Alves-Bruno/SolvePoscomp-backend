@@ -1,22 +1,9 @@
  
+QUESTÃO 07 - Determine a matriz inversa de A = (1 2 2 | 2 1 2 | 2 2 1).
 
-122
-QUESTÃO 07 - Determine a matriz inversa de 4 = (2 1 2)
-221
+A) Imagem.
+B) Imagem.
+C) Imagem. 
+D) Imagem.
+E) Imagem.
 
-LT A
-AA=[711
-131
-to =
-B4a!=[51 0
-011
-DR A
-Oat=[-7 3 4
-71
-dB?
-D4st=[2 3.2
-2 2 -3
-1133
-B4t=[53 1
-133
-

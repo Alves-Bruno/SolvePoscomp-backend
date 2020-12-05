@@ -1,6 +1,4 @@
-518 EXAME POSCOMP NS 15/8/201910:15:04
 QUESTAO 53 - Analise as assertivas abaixo sobre testes de regressão e assinale V, se verdadeiras,
-
 ou F, se falsas.
 
 () Uma suite de testes de regressão bem planejada deve conter dois tipos de casos de teste: aqueles
@@ -9,15 +7,13 @@ funcionalidades já existentes que possam ter sido afetadas pela mudança.
 
 () A execução manual de testes de regressão é inviável.
 
-(.) Testes de regressão podem estar relacionados tanto a testes funcionais quanto a testes não
+() Testes de regressão podem estar relacionados tanto a testes funcionais quanto a testes não
 funcionais.
 
 A ordem correta de preenchimento dos parênteses, de cima para baixo, é:
 
-AJF-V-E.
+A)F-V-E.
 B)V-V-v.
-CO)V-F-v.
-DJF-F-F.
-
-EBJF-F-v.
-
+C)V-F-v.
+D)F-F-F.
+E)F-F-v.

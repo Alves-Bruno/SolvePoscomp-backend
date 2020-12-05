@@ -1,14 +1,7 @@
- 
-
-- . 2-8
-QUESTÃO 05 - Calcule o lim ——:
-xo2 6Xº-3x
+QUESTÃO 05 - Calcule o lim de x->2 para (x^3 - 8)/(6x^2 - 3x^2):
 
 A)-2
-B) oo
+B)+Infinito
 C)0
 D)1
 E) -1
-
- 
-

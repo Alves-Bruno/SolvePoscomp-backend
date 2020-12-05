@@ -1,13 +1,7 @@
-518 EXAME POSCOMP NS 15/8/201910:15:04
+QUESTÃO 14 - Resolva a identidade !(!C * (!D + !E)) , aplicando, se necessário, as leis de álgebra de Boole.
 
-QUESTÃO 14 - Resolva a identidade € -(D + E) , aplicando, se necessário, as leis de álgebra de
-Boole.
-
-AJC+(D-E)
-B)C+(C+E)
-O)c+(C-E)
-DJC-(D-E)
-E)(C+D)-(C+E)
-
- 
-
+A) !C+(D*E)
+B) !C+(C+E)
+C) c+(!C*!E)
+D) !C*(D*E)
+E) (C+D)*(C+E)

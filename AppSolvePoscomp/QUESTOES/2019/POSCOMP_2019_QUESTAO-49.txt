@@ -1,7 +1,4 @@
- 
-
 QUESTÃO 49 - Em uma máquina de 32 bits, subdividimos o endereço virtual em 4 segmentos da
-
 seguinte maneira:
 
 Uma tabela de páginas de 3 níveis é utilizada, de modo que os primeiros 10 bits são para o primeiro
@@ -13,6 +10,3 @@ B) 4608 bytes.
 C) 3240 bytes.
 D) 2408 bytes.
 E) 1020 bytes.
-
- 
-

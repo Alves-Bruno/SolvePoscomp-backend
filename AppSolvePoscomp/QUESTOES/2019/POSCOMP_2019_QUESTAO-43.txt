@@ -1,7 +1,5 @@
-518 EXAME POSCOMP NS 15/8/201910:15:04
-
 QUESTÃO 43 - Considerando que determinado microcontrolador utiliza os endereços hexadecimais
-de 002016 (inclusive) até OOFFic (inclusive) para acesso a registradores de E/S (Entrada/Saída), a
+de 0x0020 (inclusive) até 0xOOFF (inclusive) para acesso a registradores de E/S (Entrada/Saída), a
 quantidade total de endereços utilizados para acesso aos registradores de E/S é de:
 
 A) 80.
@@ -9,4 +7,3 @@ B) 128.
 C) 160.
 D) 224.
 E) 236.
-

@@ -2,20 +2,17 @@
 
 QUESTÃO 25 - Considere a seguinte função em C:
 
-void funcao(int n)(
-int i,j;
-for (i=1; i<=n, i++)
-for(j=1; j<log(i); jt+)
-printf(*Yod”,i+j)
+void funcao(int n){
+	int i,j;
+	for (i=1; i<=n, i++)
+		for(j=1; j<log(i); j++)
+			printf(*Yod”,i+j)
+}
 
 A complexidade dessa função é:
 
-A) 0(n)
-B)o(nlogn)
-C) o(logn)
-D) 0(n?)
-
-E) o(nZlogn)
-
- 
-
+A) Theta(n)
+B) Theta(n log n)
+C) Theta(log n)
+D) Theta(n^2)
+E) o(n^2 log n)

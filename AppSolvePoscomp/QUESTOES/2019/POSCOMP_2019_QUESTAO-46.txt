@@ -1,5 +1,3 @@
-518 EXAME POSCOMP NS 15/8/201910:15:04
-
 QUESTÃO 46 - Um dispositivo de E/S pode acionar o seu software controlador (device driver) para
 realizar uma tarefa enquanto este esteja realizando o tratamento de outra tarefa do dispositivo. Por
 exemplo, enquanto o device driver da placa de rede processa um pacote que acabou de chegar, ele é
@@ -9,9 +7,7 @@ denominada código:
 A) Assíncrono.
 B) Assimétrico.
 C) Elástico.
-
 D) Reentrante.
 E) Recursivo.
 
  
-

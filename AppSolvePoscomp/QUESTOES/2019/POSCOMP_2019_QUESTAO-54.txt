@@ -1,13 +1,7 @@
- 
-
 QUESTÃO 54 - No modelo de referência ISO/OSI, quais são as subcamadas da camada de enlace?
 
 A) Controle de fluxo e controle de congestionamento.
-
 B) Controle de enlace lógico e controle de acesso ao meio.
 C) Multiplexação e enlace.
-
 D) Física e Rede.
-
 E) Transporte e apresentação.
-

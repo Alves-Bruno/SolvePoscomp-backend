@@ -1,12 +1,7 @@
- 
+QUESTÃO 15 - A expressão lógica ~q -> ~p é equivalente a:
 
-QUESTÃO 15 - A expressão lógica =q > —p é equivalente a:
-
-A)-pA-q
-B)-pvq
-CO -p>q
-D)p>-q
-EB)qg>p
-
- 
-
+A) ~p AND ~q
+B) ~p OU q
+C) ~p -> q
+D) p -> ~q
+E) q -> p

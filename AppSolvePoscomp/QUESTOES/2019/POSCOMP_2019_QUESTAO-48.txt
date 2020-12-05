@@ -1,5 +1,3 @@
- 
-
 QUESTÃO 48 - Um cientista da computação precisa avaliar o desempenho de seu computador para
 calcular o tempo de resposta de um algoritmo. Levando em consideração que todos os setores da
 trilha O são lidos começando do setor O, então, todos os setores da trilha 1 a partir do setor 0, e assim
@@ -13,6 +11,3 @@ B) 480,06.
 C) 320,12.
 D) 268,06.
 E) 124,12.
-
- 
-

@@ -1,19 +1,14 @@
-518 EXAME POSCOMP NS 15/8/201910:15:04
 QUESTÃO 65 - Em relação às características do protocolo TCP, analise assertivas abaixo:
 
 I. Confirma as mensagens que já foram entregues.
-
 II. E opcional que ele faça controle de congestionamento.
 II. Entrega as mensagens em ordem.
 IV. E half-duplex.
 
 Quais estão corretas?
 
-A) Apenas Ie III.
-
-B) Apenas Il e IV.
-
-C) Apenas I, Ile III.
-D) Apenas II, Ill e IV.
-EB) 1, II Ile IV.
-
+A) Apenas I e III.
+B) Apenas II e IV.
+C) Apenas I, II e III.
+D) Apenas II, III e IV.
+E) I, II, III e IV.

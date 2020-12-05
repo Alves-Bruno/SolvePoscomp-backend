@@ -1,30 +1,28 @@
-518 EXAME POSCOMP NS 15/8/201910:15:04
-QUESTAO 41 - Considere Li e L2 duas linguagens formais sobre o alfabeto > = (0,1), descritas
+QUESTAO 41 - Considere L1 e L2 duas linguagens formais sobre o alfabeto X = (0,1), descritas
 como segue:
 
-Li=4(ww|wezX')
-L2=40º1º|a>0, b>0, b ímpar )
+L1 = (ww|w pertence X*)
+L2 = (0^a 1^b| a>0, b>0, b ímpar )
 
 Na descrição acima, justaposição significa concatenação de palavras e X* denota o conjunto de todas
-as palavras sobre o alfabeto >.
+as palavras sobre o alfabeto X.
 
-Seja Ai o autômato finito sobre alfabeto X = 40,1) descrito pelo seguinte diagrama de transição de
+Seja A1 o autômato finito sobre alfabeto X = (0,1) descrito pelo seguinte diagrama de transição de
 estados:
 
  
+Denotemos por ACEITA(A1) o conjunto de palavras aceitas por A1.
 
-Denotemos por ACEITA(A1) o conjunto de palavras aceitas por Al.
 Nesse sentido, considere as seguintes afirmações:
 
-I. Li é uma linguagem regular.
+I. L1 é uma linguagem regular.
 II. L2 é uma linguagem livre de contexto.
-III. ACEITA(A1) = ( w | we X* e w possui um número ímpar de zeros >.
+III. ACEITA(A1) = ( w | w pertence X* e w possui um número ímpar de zeros).
 
 Quais estão corretas?
 
 A) Apenas I.
 B) Apenas II.
 C) Apenas I e III.
-D) Apenas Il e III.
-B)I Ile III.
-
+D) Apenas II e III.
+B)I II e III.

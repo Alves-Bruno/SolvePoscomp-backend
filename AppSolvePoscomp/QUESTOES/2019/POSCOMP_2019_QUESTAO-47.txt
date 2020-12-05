@@ -1,21 +1,11 @@
- 
-
 QUESTÃO 47 - Seja um circuito lógico com três entradas, A, B, C, e uma saída S. Considerando que
 o valor da saída S é igual ao valor da entrada A quando as entradas B e C estão no mesmo nível
 lógico, e que o valor da saída S é igual ao inverso do valor da entrada A quando as entradas Be €
 estão em níveis lógicos opostos, assinale a alternativa que apresenta a expressão lógica
 correspondente ao circuito.
 
-A)S=A -BEC
-
-B)S=46BEC
-CO)S=A4BBEC
-D)S=46BOC
-EB)S=46BOC
-
- 
-
- 
-
- 
-
+A)S=A . B+C
+B)S=4+B+C
+C)S=!A+B+C
+D)S=A+!(B+C)
+E)S=!(A+B+C)

@@ -1,13 +1,8 @@
- 
-
 QUESTÃO 60 - Uma rede conectada à Internet possui a máscara de sub-rede 255.255.255.0. Qual
 o número máximo de computadores que a rede suporta?
 
 A) 126.
 B) 128.
-Cc) 254.
+C) 254.
 D) 256.
 E) 65.534.
-
- 
-
