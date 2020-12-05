@@ -485,6 +485,27 @@ def search_view(request):
     if request.method == 'GET':
 
         keys = request.GET.keys()
+        query_set = []
+
+        # Search for text on questao:
+        # /?q=teste1&teste2
+        if 'q' in keys:
+            print(request.GET)
+            url_query = request.GET.get('q', '')
+            print(url_query)
+            text_to_search = url_query.split('§')
+            print(text_to_search)
+
+            query = Questao.objects.filter(texto__contains=text_to_search[0])
+            
+            for text in text_to_search[1:]:
+                query = query.filter(texto__contains=text)
+            
+            print(query)
+            for question in query:
+                print(question.texto)
+
+            query_set = set(x for x in query)
 
         # Search for tags:
         if 'f' in keys:
@@ -495,8 +516,14 @@ def search_view(request):
             # Busca questaos com a primeira tag
             tag_id = int(tags_to_search[0])
             tag_obj = get_object_or_404(Tag, id=tag_id)
-            query_set = set([x.questao_id for x in QuestaoTags.objects.filter(tag_id=tag_obj)])
-        
+            
+            if len(query_set) == 0:
+                query_set = set([x.questao_id for x in QuestaoTags.objects.filter(tag_id=tag_obj)])
+            else:
+                q_set = set([x.questao_id for x in QuestaoTags.objects.filter(tag_id=tag_obj)])
+                # Intersection
+                query_set = query_set.intersection(q_set)
+
             # Busca questoes para as tags seguintes
             for tag in tags_to_search[1:]:
                 if len(query_set) == 0:
