@@ -26,8 +26,8 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from rest_framework import authentication, exceptions
 from django.contrib.auth.models import AnonymousUser
-
 import ast
+# import django
 
 def get_user_by_token(request):
     if "Authorization" not in request.headers:
@@ -63,8 +63,11 @@ def index(request):
 
     # if request.user.is_authenticated:
         # print("AUTENTICADOoOOOOOOOOOOOO")
+    # token = django.middleware.csrf.get_token(request)
+    # print(token)
 
     return render(request, 'home.html')
+
 
 class validation():
     data = ''
@@ -99,8 +102,10 @@ def is_questao_valid(data, questao):
 def questao_list(request):
 
     if request.method == 'GET':
-        questoes = Questao.objects.all()
+        questoes = Questao.objects.all().order_by('-created_at')
+        # questoes = questoes.reverse()
         serializer = QuestaoSerializer(questoes, many=True)
+
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
@@ -163,6 +168,7 @@ def questao_multipart(request):
 
             # data = JSONParser().parse(request.POST)
             data = request.POST.dict()
+            # print(data)
             data['user_id'] = request.user.id
             data['tags'] = ast.literal_eval(data['tags'])
             questao_valid, serializer, questao = is_questao_valid(data, None)           

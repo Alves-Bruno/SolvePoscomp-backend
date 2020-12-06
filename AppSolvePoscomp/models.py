@@ -6,7 +6,6 @@ from rest_framework import serializers
 from datetime import datetime
 
 
-
 class Questao(models.Model):
 	# id = automagically_created
 	texto = models.CharField(max_length=10000)
