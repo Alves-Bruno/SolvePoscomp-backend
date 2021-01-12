@@ -9,6 +9,11 @@ from datetime import datetime
 class Questao(models.Model):
 	# id = automagically_created
 	texto = models.CharField(max_length=10000)
+	alt_A = models.CharField(max_length=1000)
+	alt_B = models.CharField(max_length=1000)
+	alt_C = models.CharField(max_length=1000)
+	alt_D = models.CharField(max_length=1000)
+	alt_E = models.CharField(max_length=1000)
 	imagem = models.ImageField(blank=True)
 	alternativa_correta = models.CharField(max_length=1)
 	ano = models.IntegerField()
@@ -89,10 +94,16 @@ class QuestaoSerializer(serializers.ModelSerializer):
 	created_at = serializers.ReadOnlyField()
 	updated_at = serializers.ReadOnlyField()
 	id = serializers.ReadOnlyField()
+
+	# alt_A = serializers.ReadOnlyField()
+	# alt_B = serializers.ReadOnlyField()
+	# alt_C = serializers.ReadOnlyField()
+	# alt_D = serializers.ReadOnlyField()
+	# alt_E = serializers.ReadOnlyField()
 	
 	class Meta:
 		model= Questao
-		fields= ['id', 'texto', 'imagem', 'alternativa_correta', 'ano', "tags", 'created_at', 'updated_at', 'user_id']
+		fields= ['id', 'texto', 'alt_A', 'alt_B', 'alt_C', 'alt_D', 'alt_E', 'imagem', 'alternativa_correta', 'ano', "tags", 'created_at', 'updated_at', 'user_id']
 		extra_kwargs = {'imagem': {'required': False, 'allow_null': True}}
 
 	def validate_ano(self, submitted_year):
