@@ -28,6 +28,8 @@ from rest_framework import authentication, exceptions
 from django.contrib.auth.models import AnonymousUser
 import ast
 # import django
+import re
+
 
 def get_user_by_token(request):
     if "Authorization" not in request.headers:
@@ -485,6 +487,15 @@ def caderno_rm_questao(request, id_caderno, id_questao):
         else:
             return JsonResponse({'Error':"User not logged in. " + code},status=401)
 
+def is_year(input):
+    matched = re.match(r'[0-9]{4}$', input)
+
+    if bool(matched) == True:
+        # print("REEEEEGEXXXX")
+        # print(matched.group(0))
+        return True, matched.group(0)
+    else:
+        return False, ""
 
 @csrf_exempt
 def search_view(request):
@@ -512,6 +523,22 @@ def search_view(request):
                 print(question.texto)
 
             query_set = set(x for x in query)
+
+            # Search for year too:
+            # if is_year(text_to_search[0]):
+                # query_year = Questao.objects.filter(int(text_to_search[0]))/
+
+            for text in text_to_search:
+                text_is_year, text_year = is_year(text)
+                if text_is_year:
+                    query_year = Questao.objects.filter(ano=int(text_year))
+                    for question in query_year:
+                        query_set.add(question)
+
+
+            
+
+
 
         # Search for tags:
         if 'f' in keys:
