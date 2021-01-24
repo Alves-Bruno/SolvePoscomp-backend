@@ -535,11 +535,6 @@ def search_view(request):
                     for question in query_year:
                         query_set.add(question)
 
-
-            
-
-
-
         # Search for tags:
         if 'f' in keys:
             url_query = request.GET.get('f', '')
